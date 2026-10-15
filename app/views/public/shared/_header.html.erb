@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row w-100 mx-auto">
+    <div class="col-12 col-lg-10 mx-auto px-0 d-flex align-items-center">
+
+      <h1>LOGO(仮)</h1>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto ">
+          <% if authenticated? %> 
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark">マイページ</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark">商品一覧</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark">カート</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark">ログアウト</button>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark">About</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark">商品一覧</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark">新規登録</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark">ログイン</button>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
