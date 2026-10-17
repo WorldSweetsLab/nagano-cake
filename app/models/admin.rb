@@ -8,4 +8,7 @@ class Admin < ApplicationRecord
 
   # メールアドレスを必須とし、同じアドレスの重複登録を防ぐ
   validates :email_address, presence: true, uniqueness: true
+
+  # メールアドレスの前後の空白を除き、英字を小文字にそろえる
+normalizes :email_address, with: ->(email) { email.strip.downcase }
 end
