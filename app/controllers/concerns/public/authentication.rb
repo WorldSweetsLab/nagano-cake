@@ -1,9 +1,10 @@
-module Authentication
+module Public::Authentication
   extend ActiveSupport::Concern
 
   included do
     before_action :require_authentication
-    helper_method :authenticated?
+    helper_method :authenticated_customer?
+    helper_method :current_customer
   end
 
   class_methods do
@@ -13,7 +14,13 @@ module Authentication
   end
 
   private
-    def authenticated?
+
+    def current_customer
+      resume_session
+      @current_customer ||= Current.customer if Current.session
+    end
+
+    def authenticated_customer?
       resume_session
     end
 
@@ -38,8 +45,8 @@ module Authentication
       session.delete(:return_to_after_authenticating) || root_url
     end
 
-    def start_new_session_for(user)
-      user.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
+    def start_new_session_for(customer)
+      customer.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
         Current.session = session
         cookies.signed.permanent[:session_id] = { value: session.id, httponly: true, same_site: :lax }
       end

@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  resource :session
-  resources :passwords, param: :token
+
+  # 顧客用
+  get  "/signup", to: "public/registrations#new"
+  post "/signup", to: "public/registrations#create"
+
+  scope module: :public do
+    resource :session, only: [:new, :create, :destroy]
+    resources :passwords, param: :token
+  end
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

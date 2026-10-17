@@ -1,0 +1,69 @@
+<h2>新規会員登録</h2>
+
+<%= form_with model: @customer, url: signup_path do |f| %>
+  #下のエラー共通プレートにできないか要確認
+  <% if @customer.errors.any? %>
+    <div style="color:red">
+      <% @customer.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :last_name, "名前（姓）" %>
+    <%= f.last_name_field :last_name, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :first_name, "名前（名）" %>
+    <%= f.first_name_field :first_name, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :last_name, "名前（姓）" %>
+    <%= f.last_name_field :last_name, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :last_name_kana, "名前（セイ）" %>
+    <%= f.last_name_kana_field :last_name_kana, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :first_name_kana, "名前（メイ）" %>
+    <%= f.first_name_kana_field :first_name_kana, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :email_address, "メールアドレス" %>
+    <%= f.email_field :email_address, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :postal_code, "郵便番号" %>
+    <%= f.postal_code_field :postal_code, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :address, "住所" %>
+    <%= f.address_field :address, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :phone_number, "電話番号（ハイフンなし）" %>
+    <%= f.phone_number_field :phone_numder, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :password, "パスワード" %>
+    <%= f.password_field :password, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation, "パスワード（確認）" %>
+    <%= f.password_field :password_confirmation, required: true %>
+  </div>
+
+  <%= f.submit "新規登録" %>
+<% end %>
