@@ -1,4 +1,4 @@
-class Public::RegistrationsController < ApplicationController
+class Public::RegistrationsController < Public::ApplicationController
     allow_unauthenticated_access only: %i[ new create ]
 
   def new

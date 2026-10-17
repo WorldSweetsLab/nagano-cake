@@ -12,27 +12,22 @@
 
   <div>
     <%= f.label :last_name, "名前（姓）" %>
-    <%= f.last_name_field :last_name, required: true %>
+    <%= f.text_field :last_name, required: true %>
   </div>
 
   <div>
     <%= f.label :first_name, "名前（名）" %>
-    <%= f.first_name_field :first_name, required: true %>
-  </div>
-
-  <div>
-    <%= f.label :last_name, "名前（姓）" %>
-    <%= f.last_name_field :last_name, required: true %>
+    <%= f.text_field :first_name, required: true %>
   </div>
 
   <div>
     <%= f.label :last_name_kana, "名前（セイ）" %>
-    <%= f.last_name_kana_field :last_name_kana, required: true %>
+    <%= f.text_field :last_name_kana, required: true %>
   </div>
 
   <div>
     <%= f.label :first_name_kana, "名前（メイ）" %>
-    <%= f.first_name_kana_field :first_name_kana, required: true %>
+    <%= f.text_field :first_name_kana, required: true %>
   </div>
 
   <div>
@@ -42,17 +37,17 @@
 
   <div>
     <%= f.label :postal_code, "郵便番号" %>
-    <%= f.postal_code_field :postal_code, required: true %>
+    <%= f.text_field :postal_code, required: true %>
   </div>
 
   <div>
     <%= f.label :address, "住所" %>
-    <%= f.address_field :address, required: true %>
+    <%= f.text_field :address, required: true %>
   </div>
 
   <div>
     <%= f.label :phone_number, "電話番号（ハイフンなし）" %>
-    <%= f.phone_number_field :phone_numder, required: true %>
+    <%= f.text_field :phone_numder, required: true %>
   </div>
 
   <div>
@@ -61,7 +56,7 @@
   </div>
 
   <div>
-    <%= f.label :password_confirmation, "パスワード（確認）" %>
+    <%= f.label :password_confirmation, "パスワード（確認用）" %>
     <%= f.password_field :password_confirmation, required: true %>
   </div>
 
