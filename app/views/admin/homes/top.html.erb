@@ -1,0 +1,12 @@
+<h1>管理者トップ</h1>
+
+<p>管理者としてログインしています。</p>
+
+<p>
+  メールアドレス：
+  <%= current_admin.email_address %>
+</p>
+
+<%= button_to "ログアウト",
+              admin_session_path,
+              method: :delete %>
