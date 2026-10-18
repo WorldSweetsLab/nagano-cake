@@ -1,12 +1,12 @@
-<div class="container">
+<div class="container-fluid pt-4 pb-3 border-bottom border-dark">
   <div class="row w-100 mx-auto">
-    <div class="col-12 col-lg-10 mx-auto px-0 d-flex align-items-center">
+    <div class="col-12 mx-auto px-4 d-flex align-items-center justify-content-between">
 
-      <h1>LOGO(仮)</h1>
+      <h2 class="border border-dark px-5 py-2">  LOGO  </h2>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto ">
-          <% if authenticated? %> 
+      <div class="d-flex flex-column">
+        <ul class="nav justify-content-end gap-5">
+          <% if authenticated_customer? %> 
             <li class="nav-item">
               <button type="button" class="btn btn-outline-dark">マイページ</button>
             </li>
@@ -34,6 +34,12 @@
             </li>
           <% end %>
         </ul>
+        <div class="position-relative w-50 mt-4 ms-auto">
+          <input type="search" class="form-control pe-5" placeholder="Search">
+          <span class="position-absolute top-50 translate-middle-y  end-0 me-3">
+            <%= image_tag "search.svg", width: 18 %>
+          </span>
+        </div>
       </div>
 
     </div>
