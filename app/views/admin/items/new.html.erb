@@ -1,0 +1,52 @@
+<h1>商品新規登録</h1>
+
+<%# 保存できなかった理由を表示する %>
+<% if @item.errors.any? %>
+  <ul>
+    <% @item.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: [:admin, @item] do |f| %>
+  <div>
+    <%= f.label :image, "商品画像" %>
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
+
+  <div>
+    <%= f.label :name, "商品名" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :description, "商品説明" %>
+    <%= f.text_area :description, rows: 5 %>
+  </div>
+
+  <div>
+    <%= f.label :genre_id, "ジャンル" %>
+    <%= f.collection_select :genre_id, @genres, :id, :name,
+                            prompt: "選択してください" %>
+  </div>
+
+  <div>
+    <%= f.label :price, "税抜価格" %>
+    <%= f.number_field :price, min: 0, step: 1 %>円
+  </div>
+
+  <div>
+    <span>販売状態</span>
+
+    <%= f.radio_button :is_active, true %>
+    <%= f.label :is_active_true, "販売中" %>
+
+    <%= f.radio_button :is_active, false %>
+    <%= f.label :is_active_false, "販売停止中" %>
+  </div>
+
+  <%= f.submit "新規登録" %>
+<% end %>
+
+<%= link_to "商品一覧へ戻る", admin_items_path %>
