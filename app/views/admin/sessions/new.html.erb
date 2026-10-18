@@ -1,0 +1,24 @@
+<h1>管理者ログイン</h1>
+
+<%# ログインに失敗した際のメッセージを表示する %>
+<% if flash[:alert].present? %>
+  <p><%= flash[:alert] %></p>
+<% end %>
+
+<%= form_with url: admin_session_path do |f| %>
+  <div>
+    <%= f.label :email_address, "メールアドレス" %>
+    <%= f.email_field :email_address,
+                      required: true,
+                      autocomplete: "username" %>
+  </div>
+
+  <div>
+    <%= f.label :password, "パスワード" %>
+    <%= f.password_field :password,
+                         required: true,
+                         autocomplete: "current-password" %>
+  </div>
+
+  <%= f.submit "ログイン" %>
+<% end %>
