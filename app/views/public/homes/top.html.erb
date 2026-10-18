@@ -1,36 +1,43 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-3">
-
-      <!-- ジャンル枠 -->
+      <div class="mx-auto w-50 border border-dark border-2 pb-5">
+        <p class="fw-bold text-center border-bottom border-dark border-2">ジャンル検索</p>
+        <% @genres.each do |genre| %>
+          <p class="ps-3"><%= genre.name%></p>
+        <% end %>
+      </div>
     </div>
 
     <div class="col-md-9">
-      <div class="row align-items-center">
-        <div class="col-md-5">
-          <%= image_tag "xxxxxx", class: "img-fluid" %>
-        </div>
-        <div class="col-md-7">
-          <h2>ようこそ、ながのCAKEへ!</h2>
-          <p>このサイトは、ケーキ販売のECサイトになります。<br>
-              会員でない方も商品の閲覧はできますが、<br>
-              購入には会員登録が必要になります。</p>
-        </div>
-      </div>
       <div class="row">
-        <h1>新着商品</h1>
-          <div class="col-6 col-md-3">
-            商品1
+        <div class="col-md-8">
+          <div class="row align-items-center border mb-3 py-5">
+            <div class="col-md-5 p-3">
+              <%= image_tag "dummy_cake2.jpg", class: "img-fluid" %>
+            </div>
+            <div class="col-md-7">
+              <h3>ようこそ、ながのCAKEへ!</h3><br>
+              <p>このサイトは、ケーキ販売のECサイトになります。<br>
+                  会員でない方も商品の閲覧はできますが、<br>
+                  購入には会員登録が必要になります。</p>
+            </div>
           </div>
-          <div class="col-6 col-md-3">
-            商品2
-          </div>
-          <div class="col-6 col-md-3">
-            商品3
-          </div>
-          <div class="col-6 col-md-3">
-            商品4
-          </div>
+        </div>
+
+      <div class="row mb-2 gx-3">
+        <h2 class="fw-bold mb-4">新着商品</h2>
+          <% @items.each do |item| %>
+            <div class="col-6 col-md-auto">
+              <p><%= image_tag item.get_item_image(240,160), class: "border img-fluid" %></p>
+              <p><%= item.name %></p>
+              <p>¥<%= item.price %></p>
+            </div>
+          <% end %>
+      </div>
+
+      <div class="text-end w-75 ms-5">
+        <p>すべての商品を見る ></p>
       </div>
 
     </div>
