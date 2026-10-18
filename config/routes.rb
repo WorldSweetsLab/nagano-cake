@@ -30,6 +30,6 @@ Rails.application.routes.draw do
     get "/", to: "homes#top", as: :top
 
     # 管理者の商品一覧・詳細
-    resources :items, only: [:index, :show, :new, :create]
+    resources :items, only: [:index, :show, :new, :create, :edit, :update]
   end
 end

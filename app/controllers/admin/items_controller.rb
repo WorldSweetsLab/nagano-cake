@@ -12,7 +12,7 @@ class Admin::ItemsController < Admin::ApplicationController
   # 登録フォーム用の商品と、選択肢のジャンルを用意する
   def new
     @item = Item.new
-    @genres = Genre.order(:id)
+     @genres = Genre.order(:id)
   end
 
   # フォームから受け取った内容で商品を保存する
@@ -24,8 +24,27 @@ class Admin::ItemsController < Admin::ApplicationController
     else
       # 保存できなかった場合も、ジャンルの選択肢を用意する
       @genres = Genre.order(:id)
-      render :new, status: :unprocessable_entity
+       render :new, status: :unprocessable_entity
     end
+  end
+
+    # 編集する商品と、選択肢のジャンルを取得する
+    def edit
+    @item = Item.find(params[:id])
+     @genres = Genre.order(:id)
+    end
+
+# 入力内容で既存の商品を更新する
+def update
+  @item = Item.find(params[:id])
+
+  if @item.update(item_params)
+    redirect_to admin_item_path(@item)
+  else
+    # 更新できなかった場合は編集画面を再表示する
+    @genres = Genre.order(:id)
+     render :edit, status: :unprocessable_entity
+   end
   end
 
   private
