@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_10_16_171549) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_17_122826) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -54,6 +54,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_16_171549) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email_address"], name: "index_admins_on_email_address", unique: true
   end
 
   create_table "cart_items", force: :cascade do |t|
@@ -126,11 +127,13 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_16_171549) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.integer "customer_id", null: false
+    t.integer "customer_id"
     t.string "ip_address"
     t.string "user_agent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "admin_id"
+    t.index ["admin_id"], name: "index_sessions_on_admin_id"
     t.index ["customer_id"], name: "index_sessions_on_customer_id"
   end
 
@@ -143,5 +146,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_16_171549) do
   add_foreign_key "order_details", "items"
   add_foreign_key "order_details", "orders"
   add_foreign_key "orders", "customers"
+  add_foreign_key "sessions", "admins"
   add_foreign_key "sessions", "customers"
 end
