@@ -1,0 +1,26 @@
+<h1>商品詳細</h1>
+
+<%# 画像が登録されている場合に表示する %>
+<% if @item.image.attached? %>
+  <%= image_tag @item.image, width: 300 %>
+<% else %>
+  <p>画像は登録されていません。</p>
+<% end %>
+
+<p>商品名：<%= @item.name %></p>
+
+<p>商品説明：<%= @item.description %></p>
+
+<p>ジャンル：<%= @item.genre.name %></p>
+
+<p>
+  税抜価格：<%= number_with_delimiter(@item.price) %>円
+</p>
+
+<p>
+  販売状態：<%= @item.is_active ? "販売中" : "販売停止中" %>
+</p>
+
+<%= link_to "商品一覧へ戻る", admin_items_path %>
+
+<%= link_to "商品を編集する", edit_admin_item_path(@item) %>
