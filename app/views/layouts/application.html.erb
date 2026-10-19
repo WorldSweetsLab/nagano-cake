@@ -26,9 +26,9 @@
   </head>
 
   <body>
-   <% if controller_path.start_with?("public/") %>
-    <%= render 'public/shared/header' %>
-     <% end %>
+<% unless controller_path.start_with?("admin/") %>
+  <%= render 'public/shared/header' %>
+<% end %>
      
     <main>
       <%= yield %>
