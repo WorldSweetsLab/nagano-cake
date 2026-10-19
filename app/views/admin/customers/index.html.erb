@@ -12,12 +12,14 @@
 
   <tbody>
     <% @customers.each do |customer| %>
-      <tr>
+    <tr>
         <td><%= customer.id %></td>
-        <td><%= customer.last_name %> <%= customer.first_name %></td>
-        <td><%= customer.email_address %></td>
-        <td><%= customer.is_active ? "有効" : "退会" %></td>
-      </tr>
+         <td>
+  <%= link_to "#{customer.last_name} #{customer.first_name}", admin_customer_path(customer) %>
+        </td>
+            <td><%= customer.email_address %></td>
+               <td><%= customer.is_active ? "有効" : "退会" %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>

@@ -3,4 +3,9 @@ class Admin::CustomersController < Admin::ApplicationController
   def index
     @customers = Customer.order(:id)
   end
+
+  # URLのIDに対応する会員を取得する
+  def show
+    @customer = Customer.find(params[:id])
+  end
 end
