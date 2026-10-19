@@ -30,5 +30,8 @@ Rails.application.routes.draw do
 
     # 管理者トップ
     get "/", to: "homes#top", as: :top
+
+    # 管理者の顧客一覧
+    resources :customers, only: [:index]
   end
 end
