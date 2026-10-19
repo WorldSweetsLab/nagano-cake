@@ -17,7 +17,7 @@
     <% @cart_items.each do |cart_item| %>
         <tr>
             <td>
-              <%= image_tag cart_item.item.get_item_image(135,90), class: "border" %>
+              <%= image_tag cart_item.item.get_item_image(75,50), class: "border" %>
               <%= cart_item.item.name %>
             </td>
             <td><%= cart_item.item.with_tax_price %></td>
@@ -38,3 +38,6 @@
       </tr>
     </tbody>
   </table>
+
+  <%= form_with url: cart_items_path, method: :post do |f| %>
+<% end %>
