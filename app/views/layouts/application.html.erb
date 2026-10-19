@@ -26,8 +26,10 @@
   </head>
 
   <body>
+   <% if controller_path.start_with?("public/") %>
     <%= render 'public/shared/header' %>
-    
+     <% end %>
+     
     <main>
       <%= yield %>
     </main>
