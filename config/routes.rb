@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   scope module: :public do
     resource :session, only: [:new, :create, :destroy]
     resources :passwords, param: :token
+    resources :items, only: [:index, :show]
   end
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

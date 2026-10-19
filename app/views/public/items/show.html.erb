@@ -1,0 +1,15 @@
+<h1>商品詳細</h1>
+
+  <%= image_tag @item.image, width: 300 %>
+
+<p><%= @item.name %></p>
+
+<p><%= @item.description %></p>
+
+<p>¥<%= @item.with_tax_price %>(税込)</p>
+
+<% if authenticated_customer? %>
+  <%# カート追加フォーム %>
+<% else %>
+  <%# ログインへの案内 %>
+<% end %>
