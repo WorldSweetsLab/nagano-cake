@@ -6,6 +6,12 @@ class Public::CartItemsController < Public::ApplicationController
   end
 
   def update
+    @cart_item = Current.customer.cart_items.find(params[:id])
+    if @cart_item.update(cart_item_params.slice(:amount))
+      redirect_to cart_items_path
+    else
+      redirect_to cart_items_path, alert: "数量を変更できませんでした"
+    end
   end
 
   def destroy
