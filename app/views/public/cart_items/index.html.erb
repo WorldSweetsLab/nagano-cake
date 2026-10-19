@@ -3,6 +3,8 @@
     <div class="col-8 mx-auto">
 
 <h4 class="mb-3">ショッピングカート</h4>
+<%= button_to "カートを空にする", destroy_all_cart_items_path, method: :delete, class: "btn btn-danger " %>
+
   <table class="table">
     <thead>
       <tr class="table-secondary">
@@ -45,5 +47,8 @@
       </tr>
     </tbody>
   </table>
+
+  <button type="button" class="btn btn btn-primary">買い物を続ける</button>
+  <button type="button" class="btn btn btn-success">情報入力に進む</button>
 
 
