@@ -1,19 +1,19 @@
 class Public::CustomersController < ApplicationController
-  before_action :ensure_correct_customer, only: [:show, :edit, :update]
+  
 
   def show
-    @customer= Current.customer
+    @customer= Customer.find(params[:id])
   end
 
   def edit
-    @customer= Current.customer
+    @customer= Customer.find(params[:id])
   end
 
   def update
-    @customer= Current.customer
+    @customer= Customer.find(params[:id])
 
     if @customer.update(customer_params)
-      redirect_to customer_path(customer.id), notice: "会員情報を更新しました。"
+      redirect_to customer_path(@customer.id), notice: "会員情報を更新しました。"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -35,10 +35,5 @@ class Public::CustomersController < ApplicationController
     )
   end
 
-  def ensure_correct_customer
-    @customer = Customer.find(params[:id])
-    unless @customer == Current.customer
-      redirect_to new_session_path, alert:"権限がありません。"
-    end
-  end  
+
 end
