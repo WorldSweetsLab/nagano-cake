@@ -1,0 +1,47 @@
+<div class="container-fluid pt-4 pb-3 border-bottom border-dark">
+  <div class="row w-100 mx-auto">
+    <div class="col-12 mx-auto px-4 d-flex align-items-center justify-content-between">
+
+      <%=link_to "LOGO", root_path, class: "border border-dark px-5 py-2 display-5" %>  
+
+      <div class="d-flex flex-column">
+        <ul class="nav justify-content-end gap-5">
+          <% if authenticated_customer? %> 
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark">マイページ</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark">商品一覧</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark">カート</button>
+            </li>
+            <li class="nav-item">
+              <%= button_to "ログアウト", session_path, method: :delete, class: "btn btn-outline-dark" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "About", about_path, class: "btn btn-outline-dark" %>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark">商品一覧</button>
+            </li>
+            <li class="nav-item">
+              <%= link_to "新規登録", signup_path, class: "btn btn-outline-dark" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログイン", new_session_path, class: "btn btn-outline-dark" %>
+            </li>
+          <% end %>
+        </ul>
+        <div class="position-relative w-50 mt-4 ms-auto">
+          <input type="search" class="form-control pe-5" placeholder="Search">
+          <span class="position-absolute top-50 translate-middle-y  end-0 me-3">
+            <%= image_tag "search.svg", width: 18 %>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

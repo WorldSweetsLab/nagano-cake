@@ -1,0 +1,29 @@
+<h1>商品一覧</h1>
+
+<%= link_to "商品新規登録", new_admin_item_path %>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>商品ID</th>
+      <th>商品名</th>
+      <th>税抜価格</th>
+      <th>ジャンル</th>
+      <th>販売状態</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%# 取得した商品を1件ずつ取り出して表示する %>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.id %></td>
+        <td><%= link_to item.name, admin_item_path(item) %></td>
+        <td><%= number_with_delimiter(item.price) %>円</td>
+        <td><%= item.genre.name %></td>
+        <td><%= item.is_active ? "販売中" : "販売停止中" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
