@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   # 顧客用
+  root to: "public/homes#top"
+  get  "/about", to: "public/homes#about"
   get  "/signup", to: "public/registrations#new"
   post "/signup", to: "public/registrations#create"
 
