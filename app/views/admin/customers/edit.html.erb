@@ -1,0 +1,70 @@
+<h1>会員情報編集</h1>
+
+<p>会員ID：<%= @customer.id %></p>
+
+<% if @customer.errors.any? %>
+  <div>
+    <p>入力内容を確認してください。</p>
+    <ul>
+      <% @customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: [:admin, @customer] do |f| %>
+  <div>
+    <%= f.label :last_name, "姓" %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div>
+    <%= f.label :first_name, "名" %>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div>
+    <%= f.label :last_name_kana, "セイ" %>
+    <%= f.text_field :last_name_kana %>
+  </div>
+
+  <div>
+    <%= f.label :first_name_kana, "メイ" %>
+    <%= f.text_field :first_name_kana %>
+  </div>
+
+  <div>
+    <%= f.label :postal_code, "郵便番号" %>
+    <%= f.text_field :postal_code %>
+  </div>
+
+  <div>
+    <%= f.label :address, "住所" %>
+    <%= f.text_field :address %>
+  </div>
+
+  <div>
+    <%= f.label :phone_number, "電話番号" %>
+    <%= f.telephone_field :phone_number %>
+  </div>
+
+  <div>
+    <%= f.label :email_address, "メールアドレス" %>
+    <%= f.email_field :email_address %>
+  </div>
+
+  <div>
+    <p>会員ステータス</p>
+
+    <%= f.radio_button :is_active, true %>
+    <%= f.label :is_active_true, "有効" %>
+
+    <%= f.radio_button :is_active, false %>
+    <%= f.label :is_active_false, "退会" %>
+  </div>
+
+  <%= f.submit "変更を保存" %>
+<% end %>
+
+<%= link_to "会員詳細へ戻る", admin_customer_path(@customer) %>

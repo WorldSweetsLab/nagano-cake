@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   scope module: :public do
     resource :session, only: [:new, :create, :destroy]
     resources :passwords, param: :token
+    resources :items, only: [:index, :show]
 
     get   "customers/my_page",          to: "customers#show",       as: :my_page
     get   "customers/information/edit", to: "customers#edit",       as: :edit_customer_information
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
     resources :customers, only: :update do
       get :unsubscribe, on: :member
     end
-      
+
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       collection do
         delete :destroy_all
@@ -39,14 +40,17 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  namespace :admin do
+    namespace :admin do
     # 管理者ログイン・ログアウト
     resource :session, only: [:new, :create, :destroy]
 
     # 管理者トップ
     get "/", to: "homes#top", as: :top
 
-    # 管理者の商品一覧・詳細
+    # 管理者の会員一覧・詳細・編集・更新
+    resources :customers, only: [:index, :show, :edit, :update]
+
+    # 管理者の商品一覧・詳細・新規登録・編集・更新
     resources :items, only: [:index, :show, :new, :create, :edit, :update]
   
    # 管理者の注文一覧
