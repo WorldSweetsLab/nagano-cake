@@ -29,6 +29,9 @@ class Public::CartItemsController < Public::ApplicationController
   def create
     @cart_item = Current.customer.cart_items.new(cart_item_params)
     existing_cart_item = Current.customer.cart_items.find_by(item_id: @cart_item.item_id)
+    unless @cart_item.valid?
+      return redirect_to cart_items_path, alert: "カートに追加できませんでした"
+    end
     if existing_cart_item
       existing_cart_item.amount += @cart_item.amount
       if existing_cart_item.save
