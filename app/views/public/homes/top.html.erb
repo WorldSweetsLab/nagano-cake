@@ -35,13 +35,13 @@
                 <% end %>
               </div>
               <p><%= link_to item.name, item_path(item) %></p>
-              <p>¥<%= item.with_tax_price %></p>
+              <p>¥<%= number_with_delimiter(item.with_tax_price) %></p>
             </div>
           <% end %>
       </div>
 
       <div class="text-end w-75 ms-5">
-        <p>すべての商品を見る ></p>
+        <%= link_to "全ての商品を見る > ", items_path %>
       </div>
 
     </div>

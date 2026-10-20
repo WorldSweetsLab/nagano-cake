@@ -15,7 +15,7 @@
         <div><%= image_tag @item.get_item_image(390,260), class: "border img-fluid" %></div>
         <h1 class="fs-2 fw-bold"><%= @item.name %></h1>
         <p class="fs-4"><%= @item.description %></p>
-        <p class="fs-4">¥<%= @item.with_tax_price %><span class="fs-6">(税込)</span></p>
+        <p class="fs-4">¥<%= number_with_delimiter(@item.with_tax_price) %><span class="fs-6">(税込)</span></p>
         <% if authenticated_customer? %>
           <%= form_with scope: :cart_item, url: cart_items_path, method: :post do |f| %>
             <%= f.hidden_field :item_id, value: @item.id %>
