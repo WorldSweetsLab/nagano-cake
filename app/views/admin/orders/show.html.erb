@@ -1,5 +1,13 @@
 <h1>注文履歴詳細</h1>
 
+<% if notice.present? %>
+  <p><%= notice %></p>
+<% end %>
+
+<% if alert.present? %>
+  <p><%= alert %></p>
+<% end %>
+
 <p>注文ID：<%= @order.id %></p>
 
 <p>
@@ -24,11 +32,16 @@
   <%= @order.credit_card? ? "クレジットカード" : "銀行振込" %>
 </p>
 
-<p>
-  注文ステータス：
-  <%= t("order_statuses.#{@order.status}",
-        default: @order.status.humanize) %>
-</p>
+<%= form_with model: [:admin, @order] do |f| %>
+  <%= f.label :status, "注文ステータス" %>
+
+  <%= f.select :status,
+      Order.statuses.keys.map { |status|
+        [t("order_statuses.#{status}", default: status.humanize), status]
+      } %>
+
+  <%= f.submit "更新" %>
+<% end %>
 
 <h2>注文商品</h2>
 

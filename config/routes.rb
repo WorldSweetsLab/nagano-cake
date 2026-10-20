@@ -54,6 +54,6 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show, :new, :create, :edit, :update]
   
    # 管理者の注文一覧
-    resources :orders, only: [:index, :show]
+    resources :orders, only: [:index, :show, :update]
   end
 end

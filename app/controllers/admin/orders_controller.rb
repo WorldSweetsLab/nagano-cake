@@ -15,4 +15,30 @@ class Admin::OrdersController < Admin::ApplicationController
       detail.price * detail.amount
     end
   end
+    # 注文ステータスを更新する
+  def update
+    @order = Order.find(params[:id])
+    attributes = order_params
+
+    # 定義されていないステータスは保存しない
+    unless Order.statuses.key?(attributes[:status])
+      return redirect_to admin_order_path(@order),
+                         alert: "注文ステータスを選択してください。"
+    end
+
+    if @order.update(attributes)
+      redirect_to admin_order_path(@order),
+                  notice: "注文ステータスを更新しました。"
+    else
+      redirect_to admin_order_path(@order),
+                  alert: "注文ステータスを更新できませんでした。"
+    end
+  end
+
+  private
+
+  # この画面からは注文ステータスだけ更新を許可する
+  def order_params
+    params.require(:order).permit(:status)
+  end
 end
