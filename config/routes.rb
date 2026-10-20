@@ -12,13 +12,21 @@ Rails.application.routes.draw do
     resource :session, only: [:new, :create, :destroy]
     resources :passwords, param: :token
     resources :items, only: [:index, :show]
+
+    get   "customers/my_page",          to: "customers#show",       as: :my_page
+    get   "customers/information/edit", to: "customers#edit",       as: :edit_customer_information
+    patch "customers/withdraw",         to: "customers#withdraw",   as: :withdraw_customer
+
+    resources :customers, only: :update do
+      get :unsubscribe, on: :member
+    end
+
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       collection do
         delete :destroy_all
       end
     end
   end
-  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
