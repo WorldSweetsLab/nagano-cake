@@ -1,0 +1,31 @@
+<div class="container-fluid mt-5 mb-3">
+  <div class="row">
+
+    <div class="col-md-3">
+      <div class="mx-auto w-50 border border-dark border-2 pb-5">
+        <p class="fw-bold text-center border-bottom border-dark border-2">ジャンル検索</p>
+        <% @genres.each do |genre| %>
+          <p class="ps-3"><%= genre.name%></p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="row align-items-center">
+        <h1 class="fs-2 fw-bold mb-4">商品一覧<span class="fs-4"> (全<%= @items.count %>件) </span></h1>
+          <% @items.each do |item| %>
+            <div class="col-6 col-md-auto mt-4">
+              <div>
+                <%= link_to item_path(item) do %>
+                  <%= image_tag item.get_item_image(240,160), class: "border img-fluid" %>
+                <% end %>
+              </div>
+              <p><%= link_to item.name, item_path(item) %></p>
+              <p>¥<%= item.with_tax_price %></p>
+            </div>
+          <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
