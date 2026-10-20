@@ -3,13 +3,20 @@ Rails.application.routes.draw do
   # 顧客用
   root to: "public/homes#top"
   get  "/about", to: "public/homes#about"
+
   get  "/signup", to: "public/registrations#new"
   post "/signup", to: "public/registrations#create"
+
 
   scope module: :public do
     resource :session, only: [:new, :create, :destroy]
     resources :passwords, param: :token
     resources :items, only: [:index, :show]
+    resources :cart_items, only: [:index, :update, :destroy, :create] do
+      collection do
+        delete :destroy_all
+      end
+    end
   end
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
