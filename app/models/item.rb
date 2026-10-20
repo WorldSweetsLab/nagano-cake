@@ -12,4 +12,9 @@ class Item < ApplicationRecord
   def get_item_image(width, height)
     image.variant(resize_to_fill: [width, height]).processed
   end
+  ## 消費税を求める
+  def with_tax_price
+    (price * 1.1).floor
+  end
+
 end
