@@ -40,14 +40,17 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  namespace :admin do
+    namespace :admin do
     # 管理者ログイン・ログアウト
     resource :session, only: [:new, :create, :destroy]
 
     # 管理者トップ
     get "/", to: "homes#top", as: :top
 
-    # 管理者の商品一覧・詳細
+    # 管理者の会員一覧・詳細・編集・更新
+    resources :customers, only: [:index, :show, :edit, :update]
+
+    # 管理者の商品一覧・詳細・新規登録・編集・更新
     resources :items, only: [:index, :show, :new, :create, :edit, :update]
   end
 end
