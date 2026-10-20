@@ -12,7 +12,7 @@
 
     <div class="col-md-9">
       <div class="row align-items-center">
-        <h1 class="fs-2 fw-bold mb-4">商品一覧<span class="fs-4"> (全<%= @items.count %>件) </span></h1>
+        <h1 class="fs-2 fw-bold mb-4">商品一覧<span class="fs-4"> (全<%= @items.total_count %>件) </span></h1>
           <% @items.each do |item| %>
             <div class="col-6 col-md-auto mt-4">
               <div>
@@ -24,6 +24,7 @@
               <p>¥<%= item.with_tax_price %></p>
             </div>
           <% end %>
+          <div class="mt-5"><%= paginate @items %></div>
       </div>
     </div>
 

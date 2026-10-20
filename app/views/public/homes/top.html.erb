@@ -29,9 +29,13 @@
         <h2 class="fw-bold mb-4">新着商品</h2>
           <% @items.each do |item| %>
             <div class="col-6 col-md-auto">
-              <p><%= image_tag item.get_item_image(240,160), class: "border img-fluid" %></p>
-              <p><%= item.name %></p>
-              <p>¥<%= item.price %></p>
+              <div>
+                <%= link_to item_path(item) do %>
+                  <%= image_tag item.get_item_image(240,160), class: "border img-fluid" %>
+                <% end %>
+              </div>
+              <p><%= link_to item.name, item_path(item) %></p>
+              <p>¥<%= item.with_tax_price %></p>
             </div>
           <% end %>
       </div>
