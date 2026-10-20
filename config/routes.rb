@@ -55,5 +55,8 @@ Rails.application.routes.draw do
   
    # 管理者の注文一覧
     resources :orders, only: [:index, :show, :update]
+
+    # 注文商品ごとの製作ステータス更新
+    resources :order_details, only: [:update]
   end
 end

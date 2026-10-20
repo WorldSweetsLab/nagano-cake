@@ -64,8 +64,17 @@
         <td><%= detail.amount %></td>
         <td>
           <%= number_with_delimiter(detail.price * detail.amount) %>円
-        </td>
-        <td><%= detail.making_status.humanize %></td>
+
+          <td>
+  <%= form_with model: [:admin, detail] do |f| %>
+    <%= f.select :making_status,
+        OrderDetail.making_statuses.keys.map { |status|
+          [status.humanize, status]
+        } %>
+
+    <%= f.submit "更新" %>
+  <% end %>
+</td>
       </tr>
     <% end %>
   </tbody>
