@@ -9,9 +9,18 @@ Rails.application.routes.draw do
   scope module: :public do
     resource :session, only: [:new, :create, :destroy]
     resources :passwords, param: :token
-    resources :customers, only: [:show, :edit, :update]
+
+    resources :customers, only: [:show, :edit, :update] do
+      collection do
+        get "/my_page", to: "customers#show"          
+        get "information/edit", to: "customers#edit" 
+        patch :withdraw     # 退会処理 idなし
+      end
+      member do
+        get :unsubscribe  # 退会画面 idあり
+      end
+    end
   end
-  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

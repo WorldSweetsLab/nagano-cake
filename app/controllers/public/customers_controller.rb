@@ -1,8 +1,7 @@
 class Public::CustomersController < ApplicationController
-  
-
+  before_action :ensure_correct_customer, only: [:edit, :update,]
   def show
-    @customer= Customer.find(params[:id])
+    @customer = Current.customer
   end
 
   def edit
@@ -17,6 +16,13 @@ class Public::CustomersController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def withdraw #退会機能
+    @customer = Current.customer
+    @customer.update(is_active: false)
+    terminate_session
+    redirect_to root_path, notice: "退会処理を実行しました。ご利用ありがとうございました。"
   end
 
   private
@@ -35,5 +41,10 @@ class Public::CustomersController < ApplicationController
     )
   end
 
-
+  def ensure_correct_customer #ログイン確認メソッド
+    @customer = Customer.find(params[:id])
+    unless @customer == Current.customer
+      redirect_to new_session_path, alert:"権限がありません。"
+    end
+  end 
 end
