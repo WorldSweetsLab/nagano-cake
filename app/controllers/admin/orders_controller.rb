@@ -16,23 +16,33 @@ class Admin::OrdersController < Admin::ApplicationController
     end
   end
     # 注文ステータスを更新する
+    # 注文ステータスと、必要に応じて製作ステータスを更新する
   def update
     @order = Order.find(params[:id])
     attributes = order_params
 
-    # 定義されていないステータスは保存しない
     unless Order.statuses.key?(attributes[:status])
       return redirect_to admin_order_path(@order),
                          alert: "注文ステータスを選択してください。"
     end
 
-    if @order.update(attributes)
-      redirect_to admin_order_path(@order),
-                  notice: "注文ステータスを更新しました。"
-    else
-      redirect_to admin_order_path(@order),
-                  alert: "注文ステータスを更新できませんでした。"
+    # 注文と注文商品の変更をセットで保存する
+    Order.transaction do
+      @order.update!(attributes)
+
+      # 入金確認に変わったとき、全注文商品を製作待ちにする
+      if @order.saved_change_to_status? && @order.paid_confirmation?
+        @order.order_details.each do |detail|
+          detail.update!(making_status: :waiting_production)
+        end
+      end
     end
+
+    redirect_to admin_order_path(@order),
+                notice: "注文ステータスを更新しました。"
+  rescue ActiveRecord::RecordInvalid
+    redirect_to admin_order_path(@order),
+                alert: "ステータスを更新できませんでした。"
   end
 
   private
