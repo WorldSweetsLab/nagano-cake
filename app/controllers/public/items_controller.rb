@@ -7,6 +7,7 @@ allow_unauthenticated_access only: [:index, :show]
 
   def show
     @item = Item.find(params[:id])
+    @genres = Genre.all
   end
 
 end
