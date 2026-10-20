@@ -48,5 +48,8 @@ Rails.application.routes.draw do
 
     # 管理者の商品一覧・詳細
     resources :items, only: [:index, :show, :new, :create, :edit, :update]
+  
+   # 管理者の注文一覧
+    resources :orders, only: [:index]
   end
 end

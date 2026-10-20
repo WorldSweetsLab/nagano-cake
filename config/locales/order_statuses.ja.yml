@@ -1,0 +1,7 @@
+ja:
+  order_statuses:
+    waiting_for_payment: "入金待ち"
+    paid_confirmation: "入金確認"
+    making: "製作中"
+    preparing: "発送準備中"
+    shipped: "発送済み"
