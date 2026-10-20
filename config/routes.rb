@@ -12,15 +12,14 @@ Rails.application.routes.draw do
     resource :session, only: [:new, :create, :destroy]
     resources :passwords, param: :token
 
+    get   "customers/my_page",          to: "customers#show",       as: :my_page
+    get   "customers/information/edit", to: "customers#edit",       as: :edit_customer_information
+    patch "customers/withdraw",         to: "customers#withdraw",   as: :withdraw_customer
 
-    resources :customers, only: [:show, :edit, :update] do
-      collection do
-        get "/my_page", to: "customers#show"          
-        get "information/edit", to: "customers#edit" 
-        patch :withdraw     # 退会処理 idなし
-      end
-      member do
-        get :unsubscribe  # 退会画面 idあり
+    resources :customers, only: :update do
+      get :unsubscribe, on: :member
+    end
+      
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       collection do
         delete :destroy_all

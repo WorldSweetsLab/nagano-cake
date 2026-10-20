@@ -1,18 +1,18 @@
-class Public::CustomersController < ApplicationController
-  before_action :ensure_correct_customer, only: [:edit, :update,]
+class Public::CustomersController < Public::ApplicationController
+  before_action :ensure_correct_customer, only: [:update]
   def show
     @customer = Current.customer
   end
 
   def edit
-    @customer= Customer.find(params[:id])
+    @customer= Current.customer
   end
 
   def update
-    @customer= Customer.find(params[:id])
+    @customer= Current.customer
 
     if @customer.update(customer_params)
-      redirect_to customer_path(@customer.id), notice: "会員情報を更新しました。"
+      redirect_to my_page_path, notice: "会員情報を更新しました。"
     else
       render :edit, status: :unprocessable_entity
     end
