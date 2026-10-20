@@ -1,0 +1,67 @@
+<h1>注文履歴詳細</h1>
+
+<p>注文ID：<%= @order.id %></p>
+
+<p>
+  購入日時：
+  <%= @order.created_at.strftime("%Y/%m/%d %H:%M") %>
+</p>
+
+<p>
+  購入者：
+  <%= @order.customer.last_name %>
+  <%= @order.customer.first_name %>
+</p>
+
+<p>
+  配送先：〒<%= @order.postal_code %><br>
+  <%= @order.address %><br>
+  <%= @order.name %>
+</p>
+
+<p>
+  支払方法：
+  <%= @order.credit_card? ? "クレジットカード" : "銀行振込" %>
+</p>
+
+<p>
+  注文ステータス：
+  <%= t("order_statuses.#{@order.status}",
+        default: @order.status.humanize) %>
+</p>
+
+<h2>注文商品</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価（税込）</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th>製作ステータス</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @order_details.each do |detail| %>
+      <tr>
+        <td><%= detail.item.name %></td>
+        <td><%= number_with_delimiter(detail.price) %>円</td>
+        <td><%= detail.amount %></td>
+        <td>
+          <%= number_with_delimiter(detail.price * detail.amount) %>円
+        </td>
+        <td><%= detail.making_status.humanize %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>請求情報</h2>
+
+<p>商品合計：<%= number_with_delimiter(@items_total) %>円</p>
+<p>送料：<%= number_with_delimiter(@order.shipping_cost) %>円</p>
+<p>請求額合計：<%= number_with_delimiter(@order.total_payment) %>円</p>
+
+<%= link_to "注文一覧へ戻る", admin_orders_path %>
