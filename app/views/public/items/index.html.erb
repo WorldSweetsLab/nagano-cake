@@ -1,9 +1,9 @@
-<div class="container-fluid mt-5 mb-3">
+<div class="container-fluid mt-5 mb-3 item-index">
   <div class="row">
 
     <div class="col-md-3">
       <div class="mx-auto w-50 border border-dark border-2 pb-5">
-        <p class="fw-bold text-center border-bottom border-dark border-2">ジャンル検索</p>
+        <h2 class="fs-6 fw-bold text-center py-1 border-bottom border-dark border-2">ジャンル検索</h2>
         <% @genres.each do |genre| %>
           <p class="ps-3"><%= genre.name%></p>
         <% end %>
