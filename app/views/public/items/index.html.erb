@@ -12,19 +12,23 @@
 
     <div class="col-md-9">
       <div class="row align-items-center">
-        <h1 class="fs-2 fw-bold mb-4">商品一覧<span class="fs-4"> (全<%= @items.total_count %>件) </span></h1>
-          <% @items.each do |item| %>
-            <div class="col-6 col-md-auto mt-4">
-              <div>
-                <%= link_to item_path(item) do %>
-                  <%= image_tag item.get_item_image(240,160), class: "border img-fluid" %>
-                <% end %>
-              </div>
-              <p><%= link_to item.name, item_path(item) %></p>
-              <p>¥<%= number_with_delimiter(item.with_tax_price) %></p>
+       <div class="col-md-10">
+          <h1 class="fs-2 fw-bold mb-4">商品一覧<span class="fs-4"> (全<%= @items.total_count %>件) </span></h1>
+            <div class="row">
+              <% @items.each do |item| %>
+                <div class="col-6 col-md-3 mt-4">
+                  <div>
+                    <%= link_to item_path(item) do %>
+                      <%= image_tag item.get_item_image(240,160), class: "border img-fluid" %>
+                    <% end %>
+                  </div>
+                  <p class="mt-2 mb-0 "><%= link_to item.name, item_path(item) %></p>
+                  <p>¥<%= number_with_delimiter(item.with_tax_price) %></p>
+                </div>
+              <% end %>
             </div>
-          <% end %>
-          <div class="mt-5"><%= paginate @items %></div>
+            <div class="fs-6 mt-5 mb-4"><%= paginate @items %></div>
+        </div>
       </div>
     </div>
 
