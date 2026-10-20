@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   scope module: :public do
     resource :session, only: [:new, :create, :destroy]
     resources :passwords, param: :token
+    resources :items, only: [:index, :show]
 
     get   "customers/my_page",          to: "customers#show",       as: :my_page
     get   "customers/information/edit", to: "customers#edit",       as: :edit_customer_information
