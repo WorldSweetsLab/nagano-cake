@@ -25,8 +25,10 @@
             <td><%= number_with_delimiter(cart_item.item.with_tax_price) %></td>
             <td>
               <%= form_with scope: :cart_item, url: cart_item_path(cart_item), method: :patch do |f| %>
-                <%= f.select :amount, (1..10).to_a, selected: cart_item.amount %>
-                <%= f.submit "変更", class: "btn btn-success" %>
+                <div class="d-flex align-items-center gap-3">
+                  <%= f.number_field :amount, value: cart_item.amount, min: 1, step: 1, class: "form-control w-25" %>
+                  <%= f.submit "変更", class: "btn btn-success" %>
+                </div>
               <% end %>
             </td>
             <td><%= number_with_delimiter(cart_item.subtotal) %></td>
