@@ -26,9 +26,11 @@
   </head>
 
   <body>
-  <% unless controller_path.start_with?("admin/") %>
-    <%= render 'public/shared/header' %>
-  <% end %>
+    <% unless controller_path.start_with?("admin/") %>
+      <%= render 'public/shared/header' %>
+    <% end %>
+
+    <%= render 'shared/flash' %>
     
     <main>
       <%= yield %>
