@@ -4,7 +4,7 @@
       <div class="col-4">
         <h3 class="bg-light mb-3 offset-2 px-4"style="display: inline-block;">注文情報入力</h3>
       </div>
-      <%= form_with model: @order, url: confirm_orders_path do |f| %>
+      <%= form_with model: @order, url: confirm_orders_path, method: :post, data: { turbo: false } do |f| %>
         <div class="row">
           <div class="col-sm-5">
             <h4 class="fw-bold mb-2">支払方法</h4>
@@ -51,24 +51,24 @@
         <div class="row mb-3 ms-5">   
           <label class="col-sm-3 col-form-label">郵便番号（ハイフンなし）</label>
           <div class="col-sm-4">
-            <%= f.text_field :postal_code, class: "form-control",style: "border-color: black;", required: true %>
+            <%= f.text_field :postal_code, class: "form-control",style: "border-color: black;" %>
           </div>
         </div>
         <div class="row mb-3 ms-5">  
           <label class="col-sm-3 col-form-label">住所</label>
           <div class="col-sm-7">
-            <%= f.text_field :address, class: "form-control",style: "border-color: black;", required: true %>
+            <%= f.text_field :address, class: "form-control",style: "border-color: black;" %>
           </div>
         </div>
         <div class="row mb-3 ms-5">  
           <label class="col-sm-3 col-form-label">宛名</label>
           <div class="col-sm-4">
-            <%= f.text_field :name, class: "form-control",style: "border-color: black;", required: true %>
+            <%= f.text_field :name, class: "form-control",style: "border-color: black;" %>
           </div>
         </div>
         <div class="row my-3">
           <div class="col-4 offset-4">
-            <%= link_to "確認画面へ進む", confirm_orders_path, class: "btn btn-primary w-100" %>
+            <%= f.submit "確認画面へ進む", class: "btn btn-primary w-100" %>
           </div>
         </div>
       <% end %>

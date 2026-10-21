@@ -5,26 +5,31 @@ class Public::OrdersController < Public::ApplicationController
   end
 
   def confirm 
-    @order = Order.new
-    if params[:order][:select_address] == "0"
-      @order = Order.new(order_params)
+    select_address = params[:order][:select_address]
+    @order = Order.new(order_params)
+    @cart_items = Current.customer.cart_items
+
+    if select_address == "0"
       @order.postal_code = Current.customer.postal_code
       @order.address = Current.customer.address
-      @order.name = Current.customer.first_name + current_customer.last_name
+      @order.name = Current.customer.last_name + Current.customer.first_name
 
-      elsif params[:order][:select_address] == "1"
-        @address = Current.customer.Addresses.find(params[:order][:address_id])
+      elsif select_address == "1"
+        @address = Current.customer.addresses.find(params[:order][:address_id])
         @order.postal_code = @address.postal_code
         @order.address = @address.address
         @order.name = @address.name
 
-      elsif params[:order][:select_address] == "2"
+      elsif select_address == "2"
     end
+    @order.calculate_total_payment(@cart_items)
   end
 
   def create #注文確定処理工程
     @order = Current.customer.orders.new(order_params)
-    
+      cart_items = Current.customer.cart_items
+      @order.calculate_total_payment(cart_items)
+
     ActiveRecord::Base.transaction do
       @order.save!
 
