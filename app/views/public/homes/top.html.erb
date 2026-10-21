@@ -1,8 +1,8 @@
-<div class="container-fluid mt-5 mb-3">
+<div class="container-fluid mt-5 mb-3 item-index home-top">
   <div class="row">
     <div class="col-md-3">
       <div class="mx-auto w-50 border border-dark border-2 pb-5">
-        <p class="fw-bold text-center border-bottom border-dark border-2">ジャンル検索</p>
+        <h2 class="fs-6 fw-bold text-center py-1 border-bottom border-dark border-2">ジャンル検索</h2>
         <% @genres.each do |genre| %>
           <p class="ps-3"><%= genre.name%></p>
         <% end %>
@@ -17,7 +17,7 @@
               <%= image_tag "dummy_cake2.jpg", class: "img-fluid" %>
             </div>
             <div class="col-md-7">
-              <h3>ようこそ、ながのCAKEへ!</h3><br>
+              <h1 class="fs-3 mb-4">ようこそ、ながのCAKEへ!</h1>
               <p>このサイトは、ケーキ販売のECサイトになります。<br>
                   会員でない方も商品の閲覧はできますが、<br>
                   購入には会員登録が必要になります。</p>

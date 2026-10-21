@@ -8,3 +8,15 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+.home-top a:not(.btn),
+.item-index a:not(.btn){
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-top a:not(.btn):hover,
+.item-index a:not(.btn):hover{
+  color: inherit;
+  text-decoration: underline;
+}
