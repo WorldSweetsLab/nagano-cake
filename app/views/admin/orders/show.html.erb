@@ -27,19 +27,11 @@
   <%= @order.name %>
 </p>
 
-<p>
-  支払方法：
-  <%= @order.credit_card? ? "クレジットカード" : "銀行振込" %>
-</p>
+<p>支払方法：<%= @order.payment_method_i18n %></p>
 
 <%= form_with model: [:admin, @order] do |f| %>
   <%= f.label :status, "注文ステータス" %>
-
-  <%= f.select :status,
-      Order.statuses.keys.map { |status|
-        [t("order_statuses.#{status}", default: status.humanize), status]
-      } %>
-
+  <%= f.select :status, Order.statuses_i18n.invert %>
   <%= f.submit "更新" %>
 <% end %>
 
@@ -64,16 +56,14 @@
         <td><%= detail.amount %></td>
         <td>
           <%= number_with_delimiter(detail.price * detail.amount) %>円
+        </td>
+
 
           <td>
-  <%= form_with model: [:admin, detail] do |f| %>
-    <%= f.select :making_status,
-        OrderDetail.making_statuses.keys.map { |status|
-          [status.humanize, status]
-        } %>
-
-    <%= f.submit "更新" %>
-  <% end %>
+<%= form_with model: [:admin, detail] do |f| %>
+  <%= f.select :making_status, OrderDetail.making_statuses_i18n.invert %>
+  <%= f.submit "更新" %>
+<% end %>
 </td>
       </tr>
     <% end %>
