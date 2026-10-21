@@ -6,7 +6,7 @@
 
       <div class="d-flex flex-column">
         <ul class="nav justify-content-end gap-5">
-          <% if authenticated_customer? %> 
+          <% if controller_path.start_with?("public/") && authenticated_customer? %>
             <li class="nav-item">
               <%= link_to "マイページ", my_page_path, class: "btn btn-outline-dark" %>
             </li>
