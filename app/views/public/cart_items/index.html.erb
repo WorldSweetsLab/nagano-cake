@@ -1,36 +1,41 @@
-<div class="container-fluid pt-4">
+<div class="container-fluid pt-4 ">
   <div class="row">
     <div class="col-8 mx-auto">
 
-<h4 class="mb-3">ショッピングカート</h4>
-<%= button_to "カートを空にする", destroy_all_cart_items_path, method: :delete, class: "btn btn-danger " %>
+      <div class=" d-flex justify-content-between align-items-center py-4">
+        <h1 class="mb-0 fs-4 fw-bold">ショッピングカート</h1>
+        <%= button_to "カートを空にする", destroy_all_cart_items_path, 
+            method: :delete, class: "btn btn-danger me-2" %>
+      </div>
 
-  <table class="table">
+  <table class="table align-middle">
     <thead>
       <tr class="table-secondary">
-        <th>商品名</th>
-        <th>単価(税込)</th>
-        <th>数量</th>
-        <th>小計</th>
+        <th class="py-3">商品名</th>
+        <th class="py-3">単価(税込)</th>
+        <th class="py-3 w-25">数量</th>
+        <th class="py-3">小計</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
     <% @cart_items.each do |cart_item| %>
         <tr>
-            <td>
-              <%= image_tag cart_item.item.get_item_image(75,50), class: "border" %>
+            <td class="py-4 fw-normal">
+              <%= image_tag cart_item.item.get_item_image(75,50), class: "border me-2" %>
               <%= cart_item.item.name %>
             </td>
-            <td><%= number_with_delimiter(cart_item.item.with_tax_price) %></td>
-            <td>
+            <td class="py-4 fw-normal"><%= number_with_delimiter(cart_item.item.with_tax_price) %></td>
+            <td class="py-4 fw-normal">
               <%= form_with scope: :cart_item, url: cart_item_path(cart_item), method: :patch do |f| %>
-                <%= f.select :amount, (1..10).to_a, selected: cart_item.amount %>
-                <%= f.submit "変更", class: "btn btn-success" %>
+                <div class="d-flex align-items-center gap-3">
+                  <%= f.number_field :amount, value: cart_item.amount, min: 1, step: 1, class: "form-control w-25" %>
+                  <%= f.submit "変更", class: "btn btn-success" %>
+                </div>
               <% end %>
             </td>
-            <td><%= number_with_delimiter(cart_item.subtotal) %></td>
-            <td>
+            <td class="py-4 fw-normal"><%= number_with_delimiter(cart_item.subtotal) %></td>
+            <td class="py-4 fw-normal">
               <%= button_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger" %>
             </td>
         </tr>
@@ -39,16 +44,22 @@
     </tbody>
   </table>
 
-  <table class="table w-25 ms-auto">
+
+<div class=" d-flex justify-content-between align-items-center py-4">
+  <%= link_to "買い物を続ける", items_path, class: "btn btn-primary ms-5" %>
+    <table class="table w-25 mb-0 table-bordered">
     <tbody>
       <tr>
-        <th scope="row" class="table-secondary">合計金額</th>
-        <th><%= number_with_delimiter(@total_price) %></th>
+        <th scope="row" class="table-secondary py-3">合計金額</th>
+        <th class="py-3"><%= number_with_delimiter(@total_price) %></th>
       </tr>
     </tbody>
   </table>
+  </div>
 
-  <%= link_to "買い物を続ける", items_path, class: "btn btn-primary" %>
-  <button type="button" class="btn btn btn-success">情報入力に進む</button>
+  <div class="d-flex justify-content-center mt-3 mb-5 pb-5">
+    <button type="button" class=" btn btn-success">情報入力に進む</button>
+  </div>
+
 
 
