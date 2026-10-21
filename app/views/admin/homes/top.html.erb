@@ -5,11 +5,16 @@
 <p>
   メールアドレス：
   <%= current_admin.email_address %>
-</p>
+ </p>
 
 <%= button_to "ログアウト",
               admin_session_path,
               method: :delete %>
+              
 <p>
   <%= link_to "注文履歴一覧へ", admin_orders_path %>
 </p>
+
+<p>
+<%= link_to "ジャンル一覧へ", admin_genres_path %>
+ </p>

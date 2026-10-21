@@ -1,0 +1,13 @@
+<h1>ジャンル編集</h1>
+
+<% if @genre.errors.any? %>
+  <p>ジャンルを更新できませんでした。ジャンル名を入力してください。</p>
+<% end %>
+
+<%= form_with model: [:admin, @genre] do |f| %>
+  <%= f.label :name, "ジャンル名" %>
+  <%= f.text_field :name %>
+  <%= f.submit "変更を保存" %>
+<% end %>
+
+<%= link_to "ジャンル一覧へ戻る", admin_genres_path %>
