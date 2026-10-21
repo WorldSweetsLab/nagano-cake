@@ -1,0 +1,36 @@
+<h1>注文履歴一覧</h1>
+
+<% if @orders.empty? %>
+  <p>注文はまだありません。</p>
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th>注文ID</th>
+        <th>購入日時</th>
+        <th>購入者</th>
+        <th>注文個数</th>
+        <th>請求額</th>
+        <th>注文ステータス</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= link_to order.id, admin_order_path(order) %></td>
+          <td><%= order.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td>
+            <%= order.customer.last_name %>
+            <%= order.customer.first_name %>
+          </td>
+          <td><%= order.order_details.sum(&:amount) %></td>
+          <td><%= number_with_delimiter(order.total_payment) %>円</td>
+          <%= order.status_i18n %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= link_to "管理者トップへ戻る", admin_top_path %>
