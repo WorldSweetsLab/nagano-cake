@@ -58,5 +58,8 @@ Rails.application.routes.draw do
 
     # 注文商品ごとの製作ステータス更新
     resources :order_details, only: [:update]
+
+    # 管理者のジャンル一覧・新規追加
+    resources :genres, only: [:index, :create, :edit, :update]
   end
 end
