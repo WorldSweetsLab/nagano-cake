@@ -1,36 +1,35 @@
-<main>
-  <div class="container">
-    <div class="row mt-5">
-      <div class="col-10">
-        <div><h3 class="bg-light mt-4 offset-1 px-4"style="display: inline-block;">ログイン</h3></div>
-        <div><h5 class="bg-light my-4 offset-2 px-4"style="display: inline-block;">会員の方はこちらからログイン</h5></div>
-        <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-        <%= form_with url: session_path do |f| %>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-10">
+      <div><h3 class="bg-light mt-4 offset-1 px-4"style="display: inline-block;">ログイン</h3></div>
+      <div><h5 class="bg-light my-4 offset-2 px-4"style="display: inline-block;">会員の方はこちらからログイン</h5></div>
+      <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+      <%= form_with url: session_path do |f| %>
 
-          <div class="row mb-3 justify-content-center">
-            <label class="col-sm-2 col-form-label">メールアドレス</label>
-            <div class="col-sm-6">
-              <%= f.email_field :email_address, class: "form-control", style: "border-color: black;", required: true %>
-            </div>
+        <div class="row mb-3 justify-content-center">
+          <label class="col-sm-2 col-form-label">メールアドレス</label>
+          <div class="col-sm-6">
+            <%= f.email_field :email_address, class: "form-control", style: "border-color: black;", required: true %>
           </div>
+        </div>
 
-          <div class="row mb-3 justify-content-center">
-            <label class="col-sm-2 col-form-label">パスワード</label>
-            <div class="col-sm-6">
-              <%= f.password_field :password, class: "form-control", style: "border-color: black;", required: true %>
-            </div>
+        <div class="row mb-3 justify-content-center">
+          <label class="col-sm-2 col-form-label">パスワード</label>
+          <div class="col-sm-6">
+            <%= f.password_field :password, class: "form-control", style: "border-color: black;", required: true %>
           </div>
+        </div>
 
-          <div class="row mt-5 offset-5">
-            <div class="col-sm-4">
-            <%= f.submit "ログイン", class: "btn btn-primary w-100" %>
-            </div>
+        <div class="row mt-5 offset-5">
+          <div class="col-sm-4">
+          <%= f.submit "ログイン", class: "btn btn-primary w-100" %>
           </div>
-        <% end %>
-        <h5 class="bg-light mt-5 offset-2 px-4"style="display: inline-block;">会員登録がお済みではない方</h5>
-        <h5 class="mt-4 offset-4"><%= link_to "こちら", signup_path %> から新規登録を行ってください。</h5>
-      </div>
+        </div>
+      <% end %>
+      <h5 class="bg-light mt-5 offset-2 px-4"style="display: inline-block;">会員登録がお済みではない方</h5>
+      <h5 class="mt-4 offset-4"><%= link_to "こちら", signup_path %> から新規登録を行ってください。</h5>
     </div>
   </div>
-</main>        
+</div>
+    
         
