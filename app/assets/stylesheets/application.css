@@ -20,3 +20,7 @@
   color: inherit;
   text-decoration: underline;
 }
+/* 管理者側商品フォームの入力エラー時に参照 */
+.admin-item-form .field_with_errors {
+  display: contents;
+}
