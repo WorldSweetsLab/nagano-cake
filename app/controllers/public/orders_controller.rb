@@ -28,10 +28,19 @@ class Public::OrdersController < Public::ApplicationController
   def create #注文確定処理工程
     @order = Current.customer.orders.new(order_params)
       cart_items = Current.customer.cart_items
+      @order.status = :waiting_for_payment
       @order.calculate_total_payment(cart_items)
 
     ActiveRecord::Base.transaction do
       @order.save!
+
+      if params.dig(:order, :select_address) == "2"
+        Current.customer.addresses.create!(
+          name: @order.name,
+          postal_code: @order.postal_code,
+          address: @order.address
+          )
+      end
 
       Current.customer.cart_items.each do |cart_item|
         @order.order_details.create!(
@@ -44,7 +53,7 @@ class Public::OrdersController < Public::ApplicationController
       Current.customer.cart_items.destroy_all
     end
 
-    redirect_to complete_order_path(@order)
+    redirect_to complete_orders_path(@order)
   rescue ActiveRecord::RecordInvalid
     redirect_to cart_items_path, alert: "注文を確定できませんでした。入力内容を確認してください。"   
   end
