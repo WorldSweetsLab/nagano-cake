@@ -1,79 +1,132 @@
-<h1>注文履歴詳細</h1>
+<div class="container py-5">
+  <div class="row">
+    <div class="col-12 col-lg-10 mx-auto">
+      <h1 class="fs-4 bg-light d-inline-block px-4 py-1 mb-5">
+        注文履歴詳細
+      </h1>
 
-<% if notice.present? %>
-  <p><%= notice %></p>
-<% end %>
+      <%# 注文情報 %>
+      <dl class="row gy-3 mb-5">
+        <dt class="col-sm-3 fw-normal">注文ID</dt>
+        <dd class="col-sm-9 mb-0"><%= @order.id %></dd>
 
-<% if alert.present? %>
-  <p><%= alert %></p>
-<% end %>
+        <dt class="col-sm-3 fw-normal">購入者</dt>
+        <dd class="col-sm-9 mb-0">
+          <%= link_to "#{@order.customer.last_name} #{@order.customer.first_name}",
+              admin_customer_path(@order.customer), class: "text-dark" %>
+        </dd>
 
-<p>注文ID：<%= @order.id %></p>
+        <dt class="col-sm-3 fw-normal">購入日時</dt>
+        <dd class="col-sm-9 mb-0">
+          <%= @order.created_at.strftime("%Y/%m/%d %H:%M") %>
+        </dd>
 
-<p>
-  購入日時：
-  <%= @order.created_at.strftime("%Y/%m/%d %H:%M") %>
-</p>
+        <dt class="col-sm-3 fw-normal">配送先</dt>
+        <dd class="col-sm-9 mb-0 text-break">
+          〒<%= @order.postal_code %><br>
+          <%= @order.address %><br>
+          <%= @order.name %>
+        </dd>
 
-<p>
-  購入者：
-  <%= @order.customer.last_name %>
-  <%= @order.customer.first_name %>
-</p>
+        <dt class="col-sm-3 fw-normal">支払方法</dt>
+        <dd class="col-sm-9 mb-0">
+          <%= @order.payment_method_i18n %>
+        </dd>
 
-<p>
-  配送先：〒<%= @order.postal_code %><br>
-  <%= @order.address %><br>
-  <%= @order.name %>
-</p>
+        <dt class="col-sm-3 fw-normal">注文ステータス</dt>
+        <dd class="col-sm-9 mb-0">
+          <%= form_with model: [:admin, @order],
+              class: "d-flex flex-wrap align-items-center gap-2" do |f| %>
+            <%= f.label :status, "注文ステータス", class: "visually-hidden" %>
+            <%= f.select :status, Order.statuses_i18n.invert,
+                {}, { class: "form-select w-auto" } %>
+            <%= f.submit "更新", class: "btn btn-success" %>
+          <% end %>
+        </dd>
+      </dl>
 
-<p>支払方法：<%= @order.payment_method_i18n %></p>
+      <div class="row g-4 align-items-end">
+        <%# 左側：注文商品と製作ステータス %>
+        <div class="col-lg-8">
+          <h2 class="fs-5 mb-3">注文商品</h2>
 
-<%= form_with model: [:admin, @order] do |f| %>
-  <%= f.label :status, "注文ステータス" %>
-  <%= f.select :status, Order.statuses_i18n.invert %>
-  <%= f.submit "更新" %>
-<% end %>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>商品名</th>
+                  <th class="text-end">単価（税込）</th>
+                  <th class="text-end">数量</th>
+                  <th class="text-end">小計</th>
+                  <th>製作ステータス</th>
+                </tr>
+              </thead>
 
-<h2>注文商品</h2>
+              <tbody>
+                <% @order_details.each do |detail| %>
+                  <tr>
+                    <td class="py-3"><%= detail.item.name %></td>
+                    <td class="py-3 text-end text-nowrap">
+                      <%= number_with_delimiter(detail.price) %>円
+                    </td>
+                    <td class="py-3 text-end"><%= detail.amount %></td>
+                    <td class="py-3 text-end text-nowrap">
+                      <%= number_with_delimiter(detail.price * detail.amount) %>円
+                    </td>
+                    <td class="py-3">
+                      <%= form_with model: [:admin, detail],
+                          class: "d-flex flex-wrap gap-2" do |f| %>
+                        <%= f.select :making_status,
+                            OrderDetail.making_statuses_i18n.invert,
+                            {},
+                            {
+                              class: "form-select w-auto",
+                              id: "making_status_#{detail.id}",
+                              "aria-label": "#{detail.item.name}の製作ステータス"
+                            } %>
+                        <%= f.submit "更新", class: "btn btn-success" %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>商品名</th>
-      <th>単価（税込）</th>
-      <th>数量</th>
-      <th>小計</th>
-      <th>製作ステータス</th>
-    </tr>
-  </thead>
+        <%# 右側：請求情報 %>
+        <div class="col-lg-4">
+          <h2 class="fs-5 mb-3">請求情報</h2>
 
-  <tbody>
-    <% @order_details.each do |detail| %>
-      <tr>
-        <td><%= detail.item.name %></td>
-        <td><%= number_with_delimiter(detail.price) %>円</td>
-        <td><%= detail.amount %></td>
-        <td>
-          <%= number_with_delimiter(detail.price * detail.amount) %>円
-        </td>
+          <table class="table align-middle">
+            <tbody>
+              <tr>
+                <th class="fw-normal">商品合計</th>
+                <td class="text-end text-nowrap">
+                  <%= number_with_delimiter(@items_total) %>円
+                </td>
+              </tr>
+              <tr>
+                <th class="fw-normal">送料</th>
+                <td class="text-end text-nowrap">
+                  <%= number_with_delimiter(@order.shipping_cost) %>円
+                </td>
+              </tr>
+              <tr>
+                <th>請求額合計</th>
+                <td class="text-end text-nowrap fw-bold">
+                  <%= number_with_delimiter(@order.total_payment) %>円
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-
-          <td>
-<%= form_with model: [:admin, detail] do |f| %>
-  <%= f.select :making_status, OrderDetail.making_statuses_i18n.invert %>
-  <%= f.submit "更新" %>
-<% end %>
-</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<h2>請求情報</h2>
-
-<p>商品合計：<%= number_with_delimiter(@items_total) %>円</p>
-<p>送料：<%= number_with_delimiter(@order.shipping_cost) %>円</p>
-<p>請求額合計：<%= number_with_delimiter(@order.total_payment) %>円</p>
-
-<%= link_to "注文一覧へ戻る", admin_orders_path %>
+      <div class="mt-4">
+        <%= link_to "注文一覧へ戻る", admin_orders_path,
+            class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>
