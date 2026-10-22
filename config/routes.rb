@@ -21,6 +21,13 @@ Rails.application.routes.draw do
       get :unsubscribe, on: :member
     end
 
+    resources :orders, only: [:new, :index, :show, :create] do
+      collection do
+        post :confirm
+        get :complete
+      end
+    end
+      
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       collection do
         delete :destroy_all
