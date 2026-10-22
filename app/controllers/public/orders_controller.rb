@@ -55,10 +55,12 @@ class Public::OrdersController < Public::ApplicationController
 
 
   def index #注文履歴一覧
+    @orders = Current.customer.orders
   end
 
 
   def show #注文履歴詳細画面
+    @order = Current.customer.orders.find(params[:id])
   end
 
 
