@@ -185,3 +185,9 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  views:
+    pagination:
+      first: "<< First"
+      previous: "< Previous"
+      next: "Next >"
+      last: "Last >>"
