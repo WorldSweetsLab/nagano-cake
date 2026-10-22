@@ -1,0 +1,47 @@
+<div class="container-fluid pt-4">
+  <div class="row">
+  <div class="col-10 ms-4">
+    <h3 class="bg-light mb-3 px-4 fw-bold d-inline-block offset-1">注文履歴確認</h3>
+      <table class="table table-bordered border-dark">
+        <colgroup>
+          <col style="width: 10%;">
+          <col style="width: 40%;"> 
+          <col style="width: 14%;"> 
+          <col style="width: 6%;"> 
+          <col style="width: 10%;"> 
+          <col style="width: 10%;"> 
+        </colgroup>
+        <thead class="table-light border-dark">
+          <tr>
+            <th>注文日</th>
+            <th>配送先</th>
+            <th>注文商品</th>
+            <th>支払金額</th>
+            <th>ステータス</th>
+            <th>注文詳細</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
+              <td>〒<%= order.postal_code %><%= order.address %><br>
+                  <%= order.name %>
+              </td>
+              <td>
+                <% order.order_details.each do |order_detail| %>
+                  <%= order_detail.item.name %><br> 
+                <% end %>
+              </td>  
+              <td><%= number_with_delimiter(order.total_payment) %>円</td>
+              <td><%= order.status_i18n %></td>
+              <td class="text-center align-middle">
+                <%= link_to "表示する", order_path(order), class: "btn btn-primary" %>
+              </td>
+            </tr>
+          <% end %>  
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>            
