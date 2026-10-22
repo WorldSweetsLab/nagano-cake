@@ -1,26 +1,57 @@
-<h1>商品詳細</h1>
+<div class="container py-5">
+  <div class="row">
+    <div class="col-12 col-lg-10 mx-auto">
+      <h1 class="fs-4 bg-light d-inline-block px-4 py-1 mb-5">
+        商品詳細
+      </h1>
 
-<%# 画像が登録されている場合に表示する %>
-<% if @item.image.attached? %>
-  <%= image_tag @item.image, width: 300 %>
-<% else %>
-  <p>画像は登録されていません。</p>
-<% end %>
+      <div class="row g-4">
+        <%# 左側：商品画像 %>
+        <div class="col-md-4">
+          <% if @item.image.attached? %>
+            <%= image_tag @item.image, width: 300,
+                class: "img-fluid border", alt: @item.name %>
+          <% else %>
+            <p>画像は登録されていません。</p>
+          <% end %>
+        </div>
 
-<p>商品名：<%= @item.name %></p>
+        <%# 右側：商品情報 %>
+        <div class="col-md-8">
+          <dl class="row gy-3 mb-4">
+            <dt class="col-sm-4 fw-normal">商品名</dt>
+            <dd class="col-sm-8 mb-0 text-break"><%= @item.name %></dd>
 
-<p>商品説明：<%= @item.description %></p>
+            <dt class="col-sm-4 fw-normal">商品説明</dt>
+            <dd class="col-sm-8 mb-0 text-break"><%= @item.description %></dd>
 
-<p>ジャンル：<%= @item.genre.name %></p>
+            <dt class="col-sm-4 fw-normal">ジャンル</dt>
+            <dd class="col-sm-8 mb-0"><%= @item.genre.name %></dd>
 
-<p>
-  税抜価格：<%= number_with_delimiter(@item.price) %>円
-</p>
+            <dt class="col-sm-4 fw-normal">税込価格<br>（税抜価格）</dt>
+            <dd class="col-sm-8 mb-0">
+              <%= number_with_delimiter(@item.with_tax_price) %>円
+              （<%= number_with_delimiter(@item.price) %>円）
+            </dd>
 
-<p>
-  販売状態：<%= @item.is_active ? "販売中" : "販売停止中" %>
-</p>
+            <dt class="col-sm-4 fw-normal">販売ステータス</dt>
+            <dd class="col-sm-8 mb-0">
+              <% if @item.is_active %>
+                <span class="text-success fw-bold">販売中</span>
+              <% else %>
+                <span class="text-secondary fw-bold">販売停止中</span>
+              <% end %>
+            </dd>
+          </dl>
 
-<%= link_to "商品一覧へ戻る", admin_items_path %>
-
-<%= link_to "商品を編集する", edit_admin_item_path(@item) %>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <%= link_to "編集する", edit_admin_item_path(@item),
+                class: "btn btn-success px-5" %>
+            <%= link_to "商品一覧へ戻る", admin_items_path,
+                class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
