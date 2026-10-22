@@ -19,9 +19,9 @@
             <% @cart_items.each do |cart_item| %>
               <tr>
                 <td><%= cart_item.item.name %></td>
-                <td><%= cart_item.item.with_tax_price.to_s(:delimited) %>円</td>
+                <td><%= number_with_delimiter(cart_item.item.with_tax_price) %>円</td>
                 <td><%= cart_item.amount %></td>
-                <td><%= cart_item.subtotal.to_s(:delimited) %>円</td>
+                <td><%= number_with_delimiter(cart_item.subtotal) %>円</td>
               </tr>
             <% end %>
           </tbody>
@@ -70,6 +70,7 @@
     <%= f.hidden_field :address %>
     <%= f.hidden_field :name %>
     <%= f.hidden_field :shipping_cost %>
+    <%= hidden_field_tag "order[select_address]", params.dig(:order, :select_address) %>
 
     <div class="row my-4">
       <div class="col-4 offset-4 text-center">
