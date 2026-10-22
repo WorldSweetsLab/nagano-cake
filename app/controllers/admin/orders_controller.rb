@@ -1,8 +1,9 @@
 class Admin::OrdersController < Admin::ApplicationController
-  # 購入者と注文明細をまとめて取得し、新しい注文から表示する
+  # 購入者と注文商品をまとめて取得し、新しい注文から10件ずつ表示する
   def index
     @orders = Order.includes(:customer, :order_details)
                    .order(created_at: :desc, id: :desc)
+                   .page(params[:page]).per(10)
   end
 
   # 選択した注文と、その注文商品を取得する
@@ -15,6 +16,7 @@ class Admin::OrdersController < Admin::ApplicationController
       detail.price * detail.amount
     end
   end
+
     # 注文ステータスを更新する
     # 注文ステータスと、必要に応じて製作ステータスを更新する
   def update
