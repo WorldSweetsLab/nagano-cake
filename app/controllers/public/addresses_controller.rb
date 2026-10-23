@@ -14,8 +14,12 @@ class Public::AddressesController < Public::ApplicationController
       @addresses = Current.customer.addresses.reload
       render :index, status: :unprocessable_entity
     end  
+  end 
+  
+  def edit
+    @address = Current.customer.addresses.find(params[:id])
   end  
-     
+
 
   private
 
