@@ -7,6 +7,10 @@ allow_unauthenticated_access only: [:index, :show]
       @items = Item.where(genre_id: params[:genre_id])
       @genre =Genre.find(params[:genre_id])
     end
+    if params[:word].present?
+      @word = params[:word]
+      @items = @items.where("name LIKE ?", "%#{@word}%")
+    end
     @items = @items.includes(:genre).order(created_at: :desc).page(params[:page]).per(8)
     @genres = Genre.all
   end
