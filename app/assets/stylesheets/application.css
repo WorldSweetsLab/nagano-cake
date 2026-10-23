@@ -10,13 +10,15 @@
  */
 
 .home-top a:not(.btn),
-.item-index a:not(.btn){
+.item-index a:not(.btn),
+.item-show a:not(.btn) {
   color: inherit;
   text-decoration: none;
 }
 
 .home-top a:not(.btn):hover,
-.item-index a:not(.btn):hover{
+.item-index a:not(.btn):hover,
+.item-show a:not(.btn):hover {
   color: inherit;
   text-decoration: underline;
 }
