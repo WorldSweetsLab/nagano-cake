@@ -14,7 +14,9 @@
       <div class="row align-items-center">
        <div class="col-md-10">
           <h1 class="fs-2 fw-bold mb-4">
-            <% if @genre.present? %>
+            <% if @word.present? %>
+              「<%= @word %>」の検索結果
+            <% elsif @genre.present? %>
               <%= @genre.name %>一覧
             <% else %>
               商品一覧
