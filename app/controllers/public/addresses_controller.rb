@@ -20,6 +20,17 @@ class Public::AddressesController < Public::ApplicationController
     @address = Current.customer.addresses.find(params[:id])
   end  
 
+  def update
+    @address = Current.customer.addresses.find(params[:id])
+
+    if @address.update(address_params)
+      redirect_to addresses_path, notice: "配送先情報を変更しました"
+    else
+      flash.now[:alert] = "配送先情報を変更できません"
+      render :edit, status: :unprocessable_entity
+    end
+  end      
+
 
   private
 
