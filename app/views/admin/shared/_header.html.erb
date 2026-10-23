@@ -1,0 +1,39 @@
+<header class="container-fluid pt-4 pb-3 border-bottom border-dark">
+  <div class="d-flex flex-wrap align-items-center justify-content-between gap-4 px-4">
+
+    <%= link_to "LOGO", admin_top_path,
+        class: "border border-dark px-5 py-2 display-5 text-dark text-decoration-none" %>
+
+    <div class="d-flex flex-column">
+      <nav aria-label="管理者メニュー">
+        <ul class="nav justify-content-end gap-3">
+          <li class="nav-item">
+            <%= link_to "商品一覧", admin_items_path, class: "btn btn-outline-dark" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-dark" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "注文履歴一覧", admin_orders_path, class: "btn btn-outline-dark" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ジャンル一覧", admin_genres_path, class: "btn btn-outline-dark" %>
+          </li>
+          <li class="nav-item">
+            <%= button_to "ログアウト", admin_session_path,
+                method: :delete, class: "btn btn-outline-dark" %>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="position-relative w-50 mt-4 ms-auto">
+        <input type="search" class="form-control pe-5"
+               placeholder="Search" aria-label="検索">
+        <span class="position-absolute top-50 translate-middle-y end-0 me-3">
+          <%= image_tag "search.svg", width: 18, alt: "" %>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</header>

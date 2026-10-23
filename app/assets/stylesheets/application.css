@@ -22,3 +22,13 @@
   color: inherit;
   text-decoration: underline;
 }
+/* 管理者側商品フォームの入力エラー時に参照 */
+.admin-item-form .field_with_errors {
+  display: contents;
+}
+
+/* 商品・会員フォームは、入力エラー時も横並びを保つ */
+.admin-item-form .field_with_errors,
+.admin-customer-form .field_with_errors {
+  display: contents;
+}

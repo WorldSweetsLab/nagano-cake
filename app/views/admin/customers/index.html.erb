@@ -1,27 +1,53 @@
-<h1>会員一覧</h1>
+<div class="container py-5">
+  <div class="row">
+    <div class="col-12 col-lg-10 mx-auto">
+      <h1 class="fs-4 bg-light d-inline-block px-4 py-1 mb-4">
+        会員一覧
+      </h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>会員ID</th>
-      <th>氏名</th>
-      <th>メールアドレス</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>会員ID</th>
+              <th>氏名</th>
+              <th>メールアドレス</th>
+              <th>ステータス</th>
+            </tr>
+          </thead>
 
-  <tbody>
-    <% @customers.each do |customer| %>
-    <tr>
-        <td><%= customer.id %></td>
-         <td>
-  <%= link_to "#{customer.last_name} #{customer.first_name}", admin_customer_path(customer) %>
-        </td>
-            <td><%= customer.email_address %></td>
-               <td><%= customer.is_active ? "有効" : "退会" %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+          <tbody>
+            <% @customers.each do |customer| %>
+              <tr>
+                <td class="py-3"><%= customer.id %></td>
+                <td class="py-3">
+                  <%= link_to "#{customer.last_name} #{customer.first_name}",
+                      admin_customer_path(customer), class: "text-dark" %>
+                </td>
+                <td class="py-3 text-break">
+                  <%= customer.email_address %>
+                </td>
+                <td class="py-3">
+                  <% if customer.is_active %>
+                    <span class="text-success fw-bold">有効</span>
+                  <% else %>
+                    <span class="text-secondary fw-bold">退会</span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
 
-<%= link_to "管理者トップへ戻る", admin_top_path %>
+      <div class="d-flex justify-content-center mt-4">
+        <%= paginate @customers %>
+      </div>
+
+      <div class="mt-4">
+        <%= link_to "管理者トップへ戻る", admin_top_path,
+            class: "text-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>

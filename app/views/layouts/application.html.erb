@@ -26,12 +26,15 @@
   </head>
 
   <body>
-    <% unless controller_path.start_with?("admin/") %>
-      <%= render 'public/shared/header' %>
+
+    <% if controller_path.start_with?("admin/") && authenticated_admin? %>
+      <%= render "admin/shared/header" %>
+    <% else %>
+      <%= render "public/shared/header" %>
     <% end %>
 
-    <%= render 'shared/flash' %>
-    
+    <%= render "shared/flash" %>  
+
     <main>
       <%= yield %>
     </main>  
