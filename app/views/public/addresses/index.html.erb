@@ -1,0 +1,66 @@
+<div class="container-fluid pt-4">
+  <div class="row">
+    <div class="col-10 ms-5">
+      <h3 class="bg-light mb-3 px-4 fw-bold d-inline-block offset-1">配送先登録/一覧</h3>
+      <%= form_with model:@address, url: addresses_path do |f| %>
+        <div class="row align-items-center mb-3">
+          <%= f.label :postal_code, "郵便番号（ハイフンなし）",class: "col-3 col-form-label" %>
+          <div class="col-4">
+            <%= f.text_field :postal_code, class: "form-control",style: "border-color: black;" %>
+          </div>
+        </div>
+        <div class="row align-items-center mb-3">  
+          <%= f.label :address, "住所",class: "col-3 col-form-label" %>
+          <div class="col-7">
+            <%= f.text_field :address, class: "form-control",style: "border-color: black;" %>
+          </div>
+        </div>
+        <div class="row align-items-center mb-3">  
+          <%= f.label :name, "宛名",class: "col-3 col-form-label" %>
+          <div class="col-4">
+            <%= f.text_field :name, class: "form-control",style: "border-color: black;" %>
+          </div>
+          <div class="col-3"></div>
+          <div class="col-2"> 
+            <%= f.submit "新規登録", class: " btn btn-success" %>
+          </div>
+        </div>  
+      <% end %>
+      <div class="row">
+        <div class="col-10 mt-5">
+          <table class="table table-bordered border-dark">
+            <colgroup>
+              <col style="width: 10%;">
+              <col style="width: 30%;"> 
+              <col style="width: 10%;"> 
+              <col style="width: 10%;"> 
+            </colgroup>
+            <thead class="table-light border-dark">  
+              <tr>
+                <th>郵便番号</th>
+                <th>住所</th>
+                <th>宛名</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @addresses.each do |address| %>
+                <tr>
+                  <td><%= address.postal_code %></td>
+                  <td><%= address.address %></td>
+                  <td><%= address.name %></td>
+                  <td>
+                    <%= link_to "編集する", edit_address_path(address), class: "btn btn-success" %>
+                    <%= link_to "削除する", address_path(address), class: "btn btn-danger", data: {turbo_method: :delete, turbo_confirm:"本当に消しますか？"} %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>          
+
+    

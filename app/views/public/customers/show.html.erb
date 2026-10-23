@@ -39,9 +39,15 @@
           </tr>
         </tbody>
       </table>
-      <h3 class="my-4">配送先あとでリンク先導入</h3>
       <div class="row align-items-center">
-        <div class="col-auto">
+        <div class="col-2">
+          <h4 class="mb-0">配送先</h4>
+        </div>
+        <div class="col-auto">  
+          <%= link_to "一覧を見る", addresses_path, class: "btn btn-primary" %>
+      </div>
+      <div class="row align-items-center mt-3">
+        <div class="col-2">
           <h4 class="mb-0">注文履歴</h4>
         </div>
         <div class="col-auto">  
