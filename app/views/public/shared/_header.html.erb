@@ -1,15 +1,19 @@
-<div class="container-fluid pt-4 pb-3 border-bottom border-dark">
+<div class="container-fluid pt-4 pb-3 border-bottom border-dark site-header">
   <div class="row w-100 mx-auto">
     <div class="col-12 mx-auto px-4 d-flex align-items-center justify-content-between">
 
       <%=link_to "LOGO", root_path, class: "border border-dark px-5 py-2 display-5" %>  
 
       <% if authenticated_customer? %>
-        <p class="fs-5">ようこそ、<%= Current.customer.last_name %>さん！</p>
+        <div class="welcome-line d-flex align-items-center justify-content-center gap-3">
+          <span class="welcome-border"></span>
+          <p class="fs-5">ようこそ、<%= Current.customer.last_name %>さん！</p>
+          <span class="welcome-border"></span>
+        </div>
       <% end %>
 
       <div class="d-flex flex-column">
-        <ul class="nav justify-content-end gap-5">
+        <ul class="nav justify-content-end gap-4">
           <% if authenticated_customer? %> 
             <li class="nav-item">
               <%= link_to "マイページ", my_page_path, class: "btn btn-outline-dark" %>
@@ -38,7 +42,7 @@
             </li>
           <% end %>
         </ul>
-        <div class="position-relative w-50 mt-4 ms-auto">
+        <div class="position-relative w-50 mt-2 ms-auto">
           <input type="search" class="form-control pe-5" placeholder="Search">
           <span class="position-absolute top-50 translate-middle-y  end-0 me-3">
             <%= image_tag "search.svg", width: 18 %>
