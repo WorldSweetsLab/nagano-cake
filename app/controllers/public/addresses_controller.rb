@@ -1,7 +1,7 @@
 class Public::AddressesController < Public::ApplicationController
 
   def index
-    @address = Current.customer.addresses.new
+    @address = Address.new
     @addresses = Current.customer.addresses
   end  
 
@@ -11,9 +11,17 @@ class Public::AddressesController < Public::ApplicationController
     if @address.save
       redirect_to addresses_path
     else
-      @addresses = Current.customer.addresses
+      @addresses = Current.customer.addresses.reload
       render :index, status: :unprocessable_entity
-    end     
+    end  
+  end  
+     
+
+  private
+
+  def address_params
+    params.require(:address).permit(:postal_code, :address, :name)
+  end
 end
 
 
