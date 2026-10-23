@@ -29,7 +29,13 @@ class Public::AddressesController < Public::ApplicationController
       flash.now[:alert] = "配送先情報を変更できません"
       render :edit, status: :unprocessable_entity
     end
-  end      
+  end 
+  
+  def destroy
+    @address = Current.customer.addresses.find(params[:id])
+    @address.destroy
+    redirect_to addresses_path, notice: "配送先情報を削除しました"
+  end  
 
 
   private
