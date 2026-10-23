@@ -1,7 +1,11 @@
 class Admin::ItemsController < Admin::ApplicationController
-  # 商品一覧に表示する商品とジャンルを取得する
+ 
+  # 商品をID順に、1ページ10件ずつ取得する
   def index
-    @items = Item.includes(:genre).order(:id)
+    @items = Item.includes(:genre)
+                 .order(:id)
+                 .page(params[:page])
+                 .per(10)
   end
 
   # URLの商品IDに対応する商品を取得する

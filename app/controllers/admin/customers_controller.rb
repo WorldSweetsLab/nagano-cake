@@ -1,7 +1,8 @@
 class Admin::CustomersController < Admin::ApplicationController
   # 登録されている会員をID順に取得する
+  # 会員をID順に、1ページ10件ずつ表示する
   def index
-    @customers = Customer.order(:id)
+    @customers = Customer.order(:id).page(params[:page]).per(10)
   end
 
   # URLのIDに対応する会員を取得する

@@ -1,41 +1,61 @@
-<h1>ジャンル一覧・追加</h1>
-<tr>
-  <th>ID</th>
-  <th>ジャンル名</th>
-  <th>操作</th>
-</tr>
+<div class="container py-5">
+  <div class="row">
+    <div class="col-12 col-lg-10 mx-auto">
+      <h1 class="fs-4 bg-light d-inline-block px-4 py-1 mb-5">
+        ジャンル一覧・追加
+      </h1>
 
-<% if notice.present? %>
-  <p><%= notice %></p>
-<% end %>
+      <% if @genre.errors.any? %>
+        <div class="alert alert-danger">
+          <p class="mb-0">
+            ジャンルを登録できませんでした。ジャンル名を入力してください。
+          </p>
+        </div>
+      <% end %>
 
-<% if @genre.errors.any? %>
-  <p>ジャンルを登録できませんでした。ジャンル名を入力してください。</p>
-<% end %>
+      <%= form_with model: [:admin, @genre],
+          class: "row g-3 align-items-center mb-5" do |f| %>
+        <div class="col-12 col-sm-auto">
+          <%= f.label :name, "ジャンル名", class: "col-form-label" %>
+        </div>
+        <div class="col-12 col-sm-6">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+        <div class="col-12 col-sm-auto">
+          <%= f.submit "新規登録", class: "btn btn-success px-4" %>
+        </div>
+      <% end %>
 
-<%= form_with model: [:admin, @genre] do |f| %>
-  <%= f.label :name, "ジャンル名" %>
-  <%= f.text_field :name %>
-  <%= f.submit "新規登録" %>
-<% end %>
+      <div class="col-12 col-lg-7">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>ID</th>
+                <th>ジャンル名</th>
+                <th class="text-end">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @genres.each do |genre| %>
+                <tr>
+                  <td class="py-3"><%= genre.id %></td>
+                  <td class="py-3"><%= genre.name %></td>
+                  <td class="py-3 text-end">
+                    <%= link_to "編集する", edit_admin_genre_path(genre),
+                        class: "btn btn-success" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>ジャンル名</th>
-    </tr>
-  </thead>
-  
-  <tbody>
-    <% @genres.each do |genre| %>
-<tr>
-  <td><%= genre.id %></td>
-  <td><%= genre.name %></td>
-  <td><%= link_to "編集する", edit_admin_genre_path(genre) %></td>
-</tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to "管理者トップへ戻る", admin_top_path %>
+      <div class="mt-4">
+        <%= link_to "管理者トップへ戻る", admin_top_path,
+            class: "text-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>
