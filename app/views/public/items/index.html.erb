@@ -3,9 +3,9 @@
 
     <div class="col-md-3">
       <div class="mx-auto w-50 border border-dark border-2 pb-5">
-        <h2 class="fs-6 fw-bold text-center py-1 border-bottom border-dark border-2">ジャンル検索</h2>
+        <h2 class="fs-6 fw-bold text-center py-2 mb-4 border-bottom border-dark border-2">ジャンル検索</h2>
         <% @genres.each do |genre| %>
-          <p class="ps-3"><%= genre.name%></p>
+          <p class="ps-3"><%= link_to genre.name, items_path(genre_id: genre.id)%></p>
         <% end %>
       </div>
     </div>
@@ -13,7 +13,14 @@
     <div class="col-md-9">
       <div class="row align-items-center">
        <div class="col-md-10">
-          <h1 class="fs-2 fw-bold mb-4">商品一覧<span class="fs-4"> (全<%= @items.total_count %>件) </span></h1>
+          <h1 class="fs-2 fw-bold mb-4">
+            <% if @genre.present? %>
+              <%= @genre.name %>一覧
+            <% else %>
+              商品一覧
+            <% end %>
+            <span class="fs-4">(全<%= @items.total_count %>件) </span>
+          </h1>
             <div class="row">
               <% @items.each do |item| %>
                 <div class="col-6 col-md-3 mt-4">
