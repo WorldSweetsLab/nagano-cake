@@ -1,6 +1,6 @@
 
-<div class="container">
-  <div class="row mt-5">
+<div class="container" style="padding-bottom: 100px;">
+  <div class="row">
     <div class="col-10">
       <h3 class="bg-light my-5 offset-1 px-4"style="display: inline-block;">会員情報編集</h3>
       <%= form_with model: @customer do |f| %>
@@ -63,7 +63,7 @@
         </div>
 
         <div class="row">
-          <div class="col-sm-8 offset-3">
+          <div class="col-sm-8 offset-3 mb-5">
             <div class="d-flex gap-5">  
               <%= f.submit "編集内容を保存", class: "btn btn-success" %>
               <%= link_to "退会する", unsubscribe_customer_path(@customer), class: "btn btn-secondary" %>
