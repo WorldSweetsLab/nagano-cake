@@ -1,16 +1,18 @@
 <div class="container py-5">
   <div class="row">
     <div class="col-12 col-lg-10 mx-auto">
-      <h1 class="fs-4 bg-light d-inline-block px-4 py-1 mb-5">
+      <h1 class="fs-4 bg-light d-inline-block px-4 py-1 mb-4">
         商品詳細
       </h1>
 
       <div class="row g-4">
-        <%# 左側：商品画像 %>
+        <%# 左側：画像全体を、高さ300pxの枠内に表示する %>
         <div class="col-md-4">
           <% if @item.image.attached? %>
-            <%= image_tag @item.image, width: 300,
-                class: "img-fluid border", alt: @item.name %>
+            <%= image_tag @item.image,
+                class: "w-100 border bg-light",
+                style: "height: 300px; object-fit: contain;",
+                alt: @item.name %>
           <% else %>
             <p>画像は登録されていません。</p>
           <% end %>
@@ -18,31 +20,55 @@
 
         <%# 右側：商品情報 %>
         <div class="col-md-8">
-          <dl class="row gy-3 mb-4">
-            <dt class="col-sm-4 fw-normal">商品名</dt>
-            <dd class="col-sm-8 mb-0 text-break"><%= @item.name %></dd>
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle mb-0">
+              <tbody>
+                <tr>
+                  <th scope="row" class="table-light w-25 text-nowrap">
+                    商品名
+                  </th>
+                  <td class="text-break"><%= @item.name %></td>
+                </tr>
 
-            <dt class="col-sm-4 fw-normal">商品説明</dt>
-            <dd class="col-sm-8 mb-0 text-break"><%= @item.description %></dd>
+                <tr>
+                  <th scope="row" class="table-light text-nowrap">
+                    商品説明
+                  </th>
+                  <td class="text-break"><%= @item.description %></td>
+                </tr>
 
-            <dt class="col-sm-4 fw-normal">ジャンル</dt>
-            <dd class="col-sm-8 mb-0"><%= @item.genre.name %></dd>
+                <tr>
+                  <th scope="row" class="table-light text-nowrap">
+                    ジャンル
+                  </th>
+                  <td><%= @item.genre.name %></td>
+                </tr>
 
-            <dt class="col-sm-4 fw-normal">税込価格<br>（税抜価格）</dt>
-            <dd class="col-sm-8 mb-0">
-              <%= number_with_delimiter(@item.with_tax_price) %>円
-              （<%= number_with_delimiter(@item.price) %>円）
-            </dd>
+                <tr>
+                  <th scope="row" class="table-light text-nowrap">
+                    税込価格<br>（税抜価格）
+                  </th>
+                  <td>
+                    <%= number_with_delimiter(@item.with_tax_price) %>円
+                    （<%= number_with_delimiter(@item.price) %>円）
+                  </td>
+                </tr>
 
-            <dt class="col-sm-4 fw-normal">販売ステータス</dt>
-            <dd class="col-sm-8 mb-0">
-              <% if @item.is_active %>
-                <span class="text-success fw-bold">販売中</span>
-              <% else %>
-                <span class="text-secondary fw-bold">販売停止中</span>
-              <% end %>
-            </dd>
-          </dl>
+                <tr>
+                  <th scope="row" class="table-light text-nowrap">
+                    販売ステータス
+                  </th>
+                  <td>
+                    <% if @item.is_active %>
+                      <span class="text-success fw-bold">販売中</span>
+                    <% else %>
+                      <span class="text-secondary fw-bold">販売停止中</span>
+                    <% end %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <div class="d-flex flex-wrap gap-3 mt-4">
             <%= link_to "編集する", edit_admin_item_path(@item),
