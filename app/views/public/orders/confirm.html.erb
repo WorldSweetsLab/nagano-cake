@@ -1,12 +1,11 @@
-
-<div class="container-fluid pt-4">
+<div class="container-fluid"style="padding-bottom: 200px; padding-top: 50px;">
   <h3 class="bg-light mb-3 px-4 fw-bold d-inline-block offset-1">注文情報確認</h3>
 
   <%= form_with model: @order, url: orders_path do |f| %>
     <div class="row">
-      <div class="col-lg-8">
-        <table class="table table-bordered">
-          <thead>
+      <div class="col-lg-6 ms-5">
+        <table class="table table-bordered border-dark">
+          <thead class="table-light border-dark">
             <tr>
               <th>商品名</th>
               <th>単価（税込）</th>
@@ -29,18 +28,18 @@
       </div>
 
       <div class="col-lg-4">
-        <table class="table table-bordered">
+        <table class="table table-bordered border-dark">
           <tbody>
             <tr>
-              <th>送料</th>
+              <th class="table-light border-dark">送料</th>
               <td><%= @order.shipping_cost %>円</td>
             </tr>
             <tr>
-              <th>商品合計</th>
+              <th class="table-light border-dark">商品合計</th>
               <td><%= number_with_delimiter(@cart_items.sum(&:subtotal)) %>円</td>
             </tr>
             <tr>
-              <th>請求金額</th>
+              <th class="table-light border-dark">請求金額</th>
               <td>
                 <%= number_with_delimiter((@cart_items.sum(&:subtotal) + @order.shipping_cost)) %>円
               </td>
