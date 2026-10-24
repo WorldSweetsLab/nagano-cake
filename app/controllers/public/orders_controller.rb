@@ -55,7 +55,7 @@ class Public::OrdersController < Public::ApplicationController
 
     redirect_to complete_orders_path(@order)
   rescue ActiveRecord::RecordInvalid
-    redirect_to cart_items_path, alert: "注文を確定できませんでした。入力内容を確認してください。"   
+    redirect_to new_order_path, alert: "住所が空白です。記入お願いします。"   
   end
 
   def complete #注文完了画面
