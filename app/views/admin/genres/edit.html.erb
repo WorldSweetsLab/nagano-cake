@@ -26,8 +26,17 @@
         </div>
       <% end %>
 
-      <%= link_to "ジャンル一覧へ戻る", admin_genres_path,
-          class: "btn btn-outline-secondary" %>
+        <div class="d-flex flex-wrap gap-3">
+      <%= button_to "削除する", admin_genre_path(@genre),
+        method: :delete,
+         class: "btn btn-danger",
+           form: {
+      data: { turbo_confirm: "このジャンルを削除しますか？" }
+                } %>
+
+  <%= link_to "ジャンル一覧へ戻る", admin_genres_path,
+      class: "btn btn-outline-secondary" %>
+</div>
     </div>
   </div>
 </div>

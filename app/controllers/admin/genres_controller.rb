@@ -35,6 +35,21 @@ class Admin::GenresController < Admin::ApplicationController
     end
   end
 
+# 商品が紐付いていないジャンルを削除する
+def destroy
+  @genre = Genre.find(params[:id])
+
+  if @genre.destroy
+    redirect_to admin_genres_path,
+                notice: "ジャンルを削除しました。",
+                status: :see_other
+  else
+    redirect_to edit_admin_genre_path(@genre),
+                alert: "商品が登録されているため、このジャンルは削除できません。",
+                status: :see_other
+  end
+end
+
   private
 
   # フォームから受け取る項目をジャンル名に限定する

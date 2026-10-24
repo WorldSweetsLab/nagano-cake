@@ -5,53 +5,67 @@
         注文履歴詳細
       </h1>
 
-      <%# 注文情報 %>
-      <dl class="row gy-3 mb-5">
-        <dt class="col-sm-3 fw-normal">注文ID</dt>
-        <dd class="col-sm-9 mb-0"><%= @order.id %></dd>
+          <%# 注文情報 %>
+      <div class="table-responsive mb-4">
+        <table class="table table-bordered align-middle mb-0">
+          <tbody>
+            <tr>
+              <th scope="row" class="table-light w-25 text-nowrap">
+                注文ID
+              </th>
+              <td><%= @order.id %></td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-light text-nowrap">購入者</th>
+              <td>
+                <%= link_to "#{@order.customer.last_name} #{@order.customer.first_name}",
+                    admin_customer_path(@order.customer), class: "text-dark" %>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-light text-nowrap">購入日時</th>
+              <td>
+                <%= @order.created_at.strftime("%Y/%m/%d %H:%M") %>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-light text-nowrap">配送先</th>
+              <td class="text-break">
+                〒<%= @order.postal_code %><br>
+                <%= @order.address %><br>
+                <%= @order.name %>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-light text-nowrap">支払方法</th>
+              <td><%= @order.payment_method_i18n %></td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-light text-nowrap">
+                注文ステータス
+              </th>
+              <td>
+                <%= form_with model: [:admin, @order],
+                    class: "d-flex flex-wrap align-items-center gap-2" do |f| %>
+                  <%= f.label :status, "注文ステータス",
+                      class: "visually-hidden" %>
+                  <%= f.select :status, Order.statuses_i18n.invert,
+                      {}, { class: "form-select w-auto" } %>
+                  <%= f.submit "更新", class: "btn btn-success" %>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <dt class="col-sm-3 fw-normal">購入者</dt>
-        <dd class="col-sm-9 mb-0">
-          <%= link_to "#{@order.customer.last_name} #{@order.customer.first_name}",
-              admin_customer_path(@order.customer), class: "text-dark" %>
-        </dd>
-
-        <dt class="col-sm-3 fw-normal">購入日時</dt>
-        <dd class="col-sm-9 mb-0">
-          <%= @order.created_at.strftime("%Y/%m/%d %H:%M") %>
-        </dd>
-
-        <dt class="col-sm-3 fw-normal">配送先</dt>
-        <dd class="col-sm-9 mb-0 text-break">
-          〒<%= @order.postal_code %><br>
-          <%= @order.address %><br>
-          <%= @order.name %>
-        </dd>
-
-        <dt class="col-sm-3 fw-normal">支払方法</dt>
-        <dd class="col-sm-9 mb-0">
-          <%= @order.payment_method_i18n %>
-        </dd>
-
-        <dt class="col-sm-3 fw-normal">注文ステータス</dt>
-        <dd class="col-sm-9 mb-0">
-          <%= form_with model: [:admin, @order],
-              class: "d-flex flex-wrap align-items-center gap-2" do |f| %>
-            <%= f.label :status, "注文ステータス", class: "visually-hidden" %>
-            <%= f.select :status, Order.statuses_i18n.invert,
-                {}, { class: "form-select w-auto" } %>
-            <%= f.submit "更新", class: "btn btn-success" %>
-          <% end %>
-        </dd>
-      </dl>
-
-      <div class="row g-4 align-items-end">
+       <div class="row g-4 align-items-start">
         <%# 左側：注文商品と製作ステータス %>
         <div class="col-lg-8">
           <h2 class="fs-5 mb-3">注文商品</h2>
 
           <div class="table-responsive">
-            <table class="table align-middle">
+            <table class="table table-bordered align-middle mb-0">
               <thead class="table-light">
                 <tr>
                   <th>商品名</th>
@@ -98,22 +112,22 @@
         <div class="col-lg-4">
           <h2 class="fs-5 mb-3">請求情報</h2>
 
-          <table class="table align-middle">
+          <table class="table table-bordered align-middle mb-0">
             <tbody>
               <tr>
-                <th class="fw-normal">商品合計</th>
+               <th class="table-light fw-normal">商品合計</th>
                 <td class="text-end text-nowrap">
                   <%= number_with_delimiter(@items_total) %>円
                 </td>
               </tr>
               <tr>
-                <th class="fw-normal">送料</th>
+                <th class="table-light fw-normal">送料</th>
                 <td class="text-end text-nowrap">
                   <%= number_with_delimiter(@order.shipping_cost) %>円
                 </td>
               </tr>
               <tr>
-                <th>請求額合計</th>
+                <th class="table-light">請求額合計</th>
                 <td class="text-end text-nowrap fw-bold">
                   <%= number_with_delimiter(@order.total_payment) %>円
                 </td>

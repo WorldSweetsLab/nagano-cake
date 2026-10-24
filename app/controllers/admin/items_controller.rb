@@ -51,6 +51,21 @@ def update
    end
   end
 
+  # カートや注文で使われていない商品を削除する
+def destroy
+  @item = Item.find(params[:id])
+
+  if @item.destroy
+    redirect_to admin_items_path,
+                notice: "商品を削除しました",
+                status: :see_other
+  else
+    redirect_to admin_item_path(@item),
+                alert: "カートまたは注文で使用されているため削除できません。販売を終了する場合は、販売停止中に変更してください。",
+                status: :see_other
+  end
+end
+
   private
 
   # 商品の登録で受け付ける項目を指定する
