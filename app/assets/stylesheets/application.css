@@ -14,6 +14,15 @@
   font-family: 'Zen Kaku Gothic New', sans-serif;
 }
 
+body {
+  background-color: #F7F4EC;
+}
+/* 入力フォーム・検索窓の背景を白に統一 */
+.form-control,
+.form-select {
+  background-color: #ffffff;
+}
+
 .home-top a:not(.btn),
 .item-index a:not(.btn),
 .item-show a:not(.btn) {
@@ -27,9 +36,6 @@
   text-decoration: underline;
 }
 
-.home-top {
-  background-color: #f6f3eb;
-}
 .home-top .top-genre {
   color: #213b47;
 }
@@ -77,7 +83,6 @@
 }
 
 .site-header {
-  background-color: #f6f3eb;
   color: #213b47;
   border-color: #213b47 !important;
   font-family: 'Zen Kaku Gothic New', sans-serif;
@@ -92,8 +97,6 @@
   color: #2f3a3a;
 }
 
-.site-footer {
-  background-color: #f6f3eb;
 /* 管理者側商品フォームの入力エラー時に参照 */
 .admin-item-form .field_with_errors {
   display: contents;
