@@ -16,13 +16,22 @@
 
 body {
   background-color: #F7F4EC;
+  color: #213b47;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+main {
+  flex: 1;
+}
+
 /* 入力フォーム・検索窓の背景を白に統一 */
 .form-control,
 .form-select {
   background-color: #ffffff;
 }
 
+/* TOPページリンク先下線・ホバー */
 .home-top a:not(.btn),
 .item-index a:not(.btn),
 .item-show a:not(.btn) {
@@ -32,47 +41,29 @@ body {
 .home-top a:not(.btn):hover,
 .item-index a:not(.btn):hover,
 .item-show a:not(.btn):hover {
-  color: inherit;
+  color: #426C67;
   text-decoration: underline;
 }
+.home-top .top-all-items-link {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
 
-.home-top .top-genre {
+/* ジャンル検索枠のスタイル */
+.genre-box {
   color: #213b47;
 }
-.home-top .top-genre h2 {
+.genre-box h2 {
   border-bottom: 2px solid #b4b340;
   padding-bottom: 12px;
 }
-.home-top .top-genre {
+.genre-box {
   color: #213b47;
 }
-.home-top .top-hero {
-  background-color: #65a5a6;
-  border-radius: 24px;
-  color: #ffffff;
-}
-
-.home-top .top-section-title::before {
-  content: "";
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #b4b340;
-  margin-right: 12px;
-}
-.home-top .top-item-line {
-  width: 64px;
-  border-top: 1px solid #b4b340;
-}
-.home-top .top-section-line {
-  width: 110px;
-  border-top: 1px solid #b4b340;
-}
-.home-top .top-genre-title {
+.genre-title {
   border-color: #b4b340 !important;
 }
-.home-top .top-genre-title::before {
+.genre-title::before {
   content: "";
   display: inline-block;
   width: 12px;
@@ -82,10 +73,37 @@ body {
   margin-right: 8px;
 }
 
+/* TOPメインビジュアル */
+.home-top .top-hero {
+  background-color: #65a5a6;
+  border-radius: 24px;
+  color: #ffffff;
+}
+
+/* 新着一覧、商品一覧、検索一覧セクションの装飾 */
+.section-title::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #b4b340;
+  margin-right: 12px;
+}
+.section-line {
+  width: 110px;
+  border-top: 1px solid #b4b340;
+}
+/* 新着一覧セクションの装飾 */
+.home-top .top-item-line {
+  width: 64px;
+  border-top: 1px solid #b4b340;
+}
+
+
+/* ヘッダー、ログイン中ユーザーの装飾 */
 .site-header {
-  color: #213b47;
   border-color: #213b47 !important;
-  font-family: 'Zen Kaku Gothic New', sans-serif;
 }
 .welcome-border {
   display: inline-block;
@@ -95,6 +113,16 @@ body {
 }
 .welcome-line p {
   color: #2f3a3a;
+}
+
+/* ページネーション */
+.pagination a {
+  color: #213b47;
+  text-decoration: none;
+}
+.pagination a:hover {
+  color: #426c67;
+  text-decoration: underline;
 }
 
 /* 管理者側商品フォームの入力エラー時に参照 */

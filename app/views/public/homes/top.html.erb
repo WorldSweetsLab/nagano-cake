@@ -1,8 +1,9 @@
 <div class="container-fluid pt-5 pb-5 item-index home-top">
   <div class="row">
+
     <div class="col-md-3">
-      <div class="mx-auto w-50 top-genre">
-        <h2 class="fs-6 fw-bold mb-4 pb-3 border-bottom top-genre-title">ジャンル検索</h2>
+      <div class="mx-auto w-50 genre-box">
+        <h2 class="fs-6 fw-bold mb-4 pb-3 border-bottom genre-title">ジャンル検索</h2>
         <% @genres.each do |genre| %>
           <p class="ps-3"><%= link_to genre.name, items_path(genre_id: genre.id)%></p>
         <% end %>
@@ -28,9 +29,9 @@
         </div>
 
       <div class="row mt-4 mb-2 gx-4">
-        <h2 class="fs-4 fw-normal mb-4 d-flex align-items-center gap-3 top-section-title">
+        <h2 class="fs-4 fw-normal mb-4 d-flex align-items-center gap-3 section-title">
           新着商品
-          <span class="top-section-line"></span>
+          <span class="section-line"></span>
         </h2>
           <% @items.each do |item| %>
             <div class="col-6 col-md-3 mb-4">
@@ -49,7 +50,7 @@
       </div>
 
       <div class="text-end pe-3">
-        <%= link_to "全ての商品を見る > ", items_path %>
+        <%= link_to "全ての商品を見る > ", items_path, class: "top-all-items-link" %>
       </div>
 
     </div>
