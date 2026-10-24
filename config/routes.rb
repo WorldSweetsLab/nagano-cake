@@ -69,6 +69,6 @@ Rails.application.routes.draw do
     resources :order_details, only: [:update]
 
     # 管理者のジャンル一覧・新規追加
-    resources :genres, only: [:index, :create, :edit, :update]
+    resources :genres, only: [:index, :create, :edit, :update, :destroy]
   end
 end
