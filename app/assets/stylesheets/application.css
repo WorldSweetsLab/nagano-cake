@@ -15,12 +15,14 @@
 }
 
 .home-top a:not(.btn),
-.item-index a:not(.btn){
+.item-index a:not(.btn),
+.item-show a:not(.btn) {
   color: inherit;
   text-decoration: none;
 }
 .home-top a:not(.btn):hover,
-.item-index a:not(.btn):hover{
+.item-index a:not(.btn):hover,
+.item-show a:not(.btn):hover {
   color: inherit;
   text-decoration: underline;
 }
@@ -92,4 +94,13 @@
 
 .site-footer {
   background-color: #f6f3eb;
+/* 管理者側商品フォームの入力エラー時に参照 */
+.admin-item-form .field_with_errors {
+  display: contents;
+}
+
+/* 商品・会員フォームは、入力エラー時も横並びを保つ */
+.admin-item-form .field_with_errors,
+.admin-customer-form .field_with_errors {
+  display: contents;
 }

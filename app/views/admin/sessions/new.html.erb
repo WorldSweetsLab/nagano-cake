@@ -1,24 +1,58 @@
-<h1>管理者ログイン</h1>
+<div class="container py-5">
+  <div class="row">
+    <div class="col-12 col-lg-10 mx-auto">
 
-<%# ログインに失敗した際のメッセージを表示する %>
-<% if flash[:alert].present? %>
-  <p><%= flash[:alert] %></p>
-<% end %>
+      <h1 class="fs-4 bg-light d-inline-block px-4 py-1 mb-5">
+        管理者ログイン
+      </h1>
 
-<%= form_with url: admin_session_path do |f| %>
-  <div>
-    <%= f.label :email_address, "メールアドレス" %>
-    <%= f.email_field :email_address,
-                      required: true,
-                      autocomplete: "username" %>
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-9">
+
+          <%# ログインに失敗した際のメッセージを表示する %>
+          <% if flash[:alert].present? %>
+            <div class="alert alert-danger" role="alert">
+              <%= flash[:alert] %>
+            </div>
+          <% end %>
+
+          <%= form_with url: admin_session_path do |f| %>
+
+            <%# ラベルと入力欄を横に並べる %>
+            <div class="row align-items-center mb-3">
+              <%= f.label :email_address, "メールアドレス",
+                  class: "col-md-3 col-form-label" %>
+              <div class="col-md-9">
+                <%= f.email_field :email_address,
+                    required: true,
+                    autocomplete: "username",
+                    placeholder: "sample@example.com",
+                    class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="row align-items-center mb-3">
+              <%= f.label :password, "パスワード",
+                  class: "col-md-3 col-form-label" %>
+              <div class="col-md-9">
+                <%= f.password_field :password,
+                    required: true,
+                    autocomplete: "current-password",
+                    class: "form-control" %>
+              </div>
+            </div>
+
+            <%# 入力欄の左端にボタンの位置を合わせる %>
+            <div class="row mt-4">
+              <div class="col-md-9 offset-md-3">
+                <%= f.submit "ログイン", class: "btn btn-primary px-5" %>
+              </div>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+
+    </div>
   </div>
-
-  <div>
-    <%= f.label :password, "パスワード" %>
-    <%= f.password_field :password,
-                         required: true,
-                         autocomplete: "current-password" %>
-  </div>
-
-  <%= f.submit "ログイン" %>
-<% end %>
+</div>

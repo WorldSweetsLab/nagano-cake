@@ -1,10 +1,10 @@
 <div class="container-fluid pt-5 pb-5 item-index home-top">
   <div class="row">
     <div class="col-md-3">
-      <div class="mx-auto w-50 top-genre">
-        <h2 class="fs-6 fw-bold mb-4 pb-3 border-bottom top-genre-title">ジャンル検索</h2>
+      <div class="mx-auto w-50 border border-dark border-2 pb-5">
+        <h2 class="fs-6 fw-bold text-center py-2 mb-4 border-bottom border-dark border-2">ジャンル検索</h2>
         <% @genres.each do |genre| %>
-          <p class="ps-3 top-genre-item"><%= genre.name%></p>
+          <p class="ps-3"><%= link_to genre.name, items_path(genre_id: genre.id)%></p>
         <% end %>
       </div>
     </div>

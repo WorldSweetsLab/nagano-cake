@@ -4,6 +4,7 @@
 
       <%=link_to "LOGO", root_path, class: "border border-dark px-5 py-2 display-5" %>  
 
+<<<<<<< HEAD
       <% if authenticated_customer? %>
         <div class="welcome-line d-flex align-items-center justify-content-center gap-3">
           <span class="welcome-border"></span>
@@ -42,11 +43,22 @@
             </li>
           <% end %>
         </ul>
+<<<<<<< HEAD
         <div class="position-relative w-50 mt-2 ms-auto">
           <input type="search" class="form-control pe-5" placeholder="Search">
           <span class="position-absolute top-50 translate-middle-y  end-0 me-3">
             <%= image_tag "search.svg", width: 18 %>
           </span>
+=======
+        <div class="position-relative w-50 mt-4 ms-auto">
+          <%= form_with url: items_path, method: :get do |f| %>
+            <%= f.search_field :word, class: "form-control pe-5", placeholder: "Search" %>
+            <button type="submit" class=
+            "position-absolute top-50 translate-middle-y end-0 me-3 border-0 bg-transparent">
+              <%= image_tag "search.svg", width: 18 %>
+            </button>
+          <% end %>
+>>>>>>> develop
         </div>
       </div>
 

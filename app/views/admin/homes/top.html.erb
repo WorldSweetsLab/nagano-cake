@@ -1,20 +1,36 @@
-<h1>管理者トップ</h1>
+<div class="container py-5">
+  <div class="row">
+    <div class="col-12 col-lg-10 mx-auto">
+      <h1 class="fs-4 bg-light d-inline-block px-4 py-1 mb-4">
+        管理者トップ
+      </h1>
 
-<p>管理者としてログインしています。</p>
+      <p class="text-break mb-5">
+        ログイン中：<%= current_admin.email_address %>
+      </p>
 
-<p>
-  メールアドレス：
-  <%= current_admin.email_address %>
- </p>
+      <%# 各管理画面へのメニュー %>
+      <div class="row g-4">
+        <div class="col-12 col-sm-6">
+          <%= link_to "商品一覧", admin_items_path,
+              class: "btn btn-outline-dark d-block py-4" %>
+        </div>
 
-<%= button_to "ログアウト",
-              admin_session_path,
-              method: :delete %>
-              
-<p>
-  <%= link_to "注文履歴一覧へ", admin_orders_path %>
-</p>
+        <div class="col-12 col-sm-6">
+          <%= link_to "会員一覧", admin_customers_path,
+              class: "btn btn-outline-dark d-block py-4" %>
+        </div>
 
-<p>
-<%= link_to "ジャンル一覧へ", admin_genres_path %>
- </p>
+        <div class="col-12 col-sm-6">
+          <%= link_to "注文履歴一覧", admin_orders_path,
+              class: "btn btn-outline-dark d-block py-4" %>
+        </div>
+
+        <div class="col-12 col-sm-6">
+          <%= link_to "ジャンル一覧", admin_genres_path,
+              class: "btn btn-outline-dark d-block py-4" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
