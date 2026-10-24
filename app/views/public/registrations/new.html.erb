@@ -4,7 +4,6 @@
     <div class="col-10">
       <h3 class="bg-light my-5 offset-1 px-4"style="display: inline-block;">新規会員登録</h3>
       <%= form_with model: @customer, url: signup_path do |f| %>
-        #下のエラー共通プレートにできないか要確認
         <% if @customer.errors.any? %>
           <div style="color:red">
           <ui>
@@ -96,7 +95,7 @@
         </div>
       <% end %>
       <h3 class="bg-light mt-5 offset-1 px-4"style="display: inline-block;">既に登録済みの方</h3>
-      <h5 class="mt-2 offset-2"><%= link_to "こちら", new_session_path %> からログインしてください。</h5>
+      <h5 class="my-5 offset-2"><%= link_to "こちら", new_session_path %> からログインしてください。</h5>
     </div>
   </div>
 </div>

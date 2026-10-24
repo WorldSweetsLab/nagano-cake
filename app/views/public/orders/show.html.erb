@@ -1,5 +1,5 @@
 <% subtotal = @order.order_details.sum { |detail| detail.price * detail.amount } %>
-<div class="container-fluid pt-4">
+<div class="container-fluid pt-4" style="padding-bottom: 50px;">
   <div class="row">
     <div class="col-10 ms-5">
       <h3 class="bg-light mb-3 px-4 fw-bold d-inline-block offset-1">注文履歴詳細</h3>

@@ -1,49 +1,67 @@
 <div class="container py-5">
   <div class="row">
     <div class="col-12 col-lg-10 mx-auto">
-      <h1 class="fs-4 bg-light d-inline-block px-4 py-1 mb-5">
+      <h1 class="fs-4 bg-light d-inline-block px-4 py-1 mb-4">
         <%= @customer.last_name %> <%= @customer.first_name %>さんの会員詳細
       </h1>
 
-      <dl class="row gy-3 mb-4">
-        <dt class="col-sm-3 fw-normal">会員ID</dt>
-        <dd class="col-sm-9 mb-0"><%= @customer.id %></dd>
+      <%# 項目名と登録内容を、枠線付きの表で表示する %>
+      <div class="table-responsive">
+        <table class="table table-bordered align-middle mb-0">
+          <tbody>
+            <tr>
+              <th scope="row" class="table-light w-25 text-nowrap">
+                会員ID
+              </th>
+              <td><%= @customer.id %></td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-light text-nowrap">氏名</th>
+              <td>
+                <%= @customer.last_name %> <%= @customer.first_name %>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-light text-nowrap">フリガナ</th>
+              <td>
+                <%= @customer.last_name_kana %> <%= @customer.first_name_kana %>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-light text-nowrap">郵便番号</th>
+              <td><%= @customer.postal_code %></td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-light text-nowrap">住所</th>
+              <td class="text-break"><%= @customer.address %></td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-light text-nowrap">電話番号</th>
+              <td><%= @customer.phone_number %></td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-light text-nowrap">
+                メールアドレス
+              </th>
+              <td class="text-break"><%= @customer.email_address %></td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-light text-nowrap">
+                会員ステータス
+              </th>
+              <td>
+                <% if @customer.is_active %>
+                  <span class="text-success fw-bold">有効</span>
+                <% else %>
+                  <span class="text-secondary fw-bold">退会</span>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <dt class="col-sm-3 fw-normal">氏名</dt>
-        <dd class="col-sm-9 mb-0">
-          <%= @customer.last_name %> <%= @customer.first_name %>
-        </dd>
-
-        <dt class="col-sm-3 fw-normal">フリガナ</dt>
-        <dd class="col-sm-9 mb-0">
-          <%= @customer.last_name_kana %> <%= @customer.first_name_kana %>
-        </dd>
-
-        <dt class="col-sm-3 fw-normal">郵便番号</dt>
-        <dd class="col-sm-9 mb-0"><%= @customer.postal_code %></dd>
-
-        <dt class="col-sm-3 fw-normal">住所</dt>
-        <dd class="col-sm-9 mb-0 text-break"><%= @customer.address %></dd>
-
-        <dt class="col-sm-3 fw-normal">電話番号</dt>
-        <dd class="col-sm-9 mb-0"><%= @customer.phone_number %></dd>
-
-        <dt class="col-sm-3 fw-normal">メールアドレス</dt>
-        <dd class="col-sm-9 mb-0 text-break">
-          <%= @customer.email_address %>
-        </dd>
-
-        <dt class="col-sm-3 fw-normal">会員ステータス</dt>
-        <dd class="col-sm-9 mb-0">
-          <% if @customer.is_active %>
-            <span class="text-success fw-bold">有効</span>
-          <% else %>
-            <span class="text-secondary fw-bold">退会</span>
-          <% end %>
-        </dd>
-      </dl>
-
-      <div class="d-flex flex-wrap gap-3 mt-5">
+      <div class="d-flex flex-wrap gap-3 mt-4">
         <%= link_to "編集する", edit_admin_customer_path(@customer),
             class: "btn btn-success px-5" %>
         <%= link_to "会員一覧へ戻る", admin_customers_path,

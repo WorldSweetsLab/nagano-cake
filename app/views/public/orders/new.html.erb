@@ -8,11 +8,11 @@
         <div class="col-sm-5">
           <h4 class="fw-bold mb-2">支払方法</h4>
           <div class="form-check offset-1">
-            <%= f.radio_button :payment_method, Order.payment_methods.key(0), class: "form-check-input" %>
+            <%= f.radio_button :payment_method, Order.payment_methods.key(0), class: "form-check-input",required: true %>
             <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card], class: "form-check-label" %>
           </div>
           <div class="form-check offset-1">
-            <%= f.radio_button :payment_method, Order.payment_methods.key(1), class: "form-check-input" %>
+            <%= f.radio_button :payment_method, Order.payment_methods.key(1), class: "form-check-input",required: true %>
             <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer], class: "form-check-label" %>
           </div>
         </div>
@@ -21,7 +21,7 @@
         <div class="col-9 mt-3">
           <h4 class="fw-bold mb-2">お届け先</h4>
           <div class="form-check">
-            <%= f.radio_button :select_address, "0" %>
+            <%= f.radio_button :select_address, "0",required: true %>
             <%= f.label :select_address_0, "ご自身の住所" %>
             <p>
               〒<%= Current.customer.postal_code %><%= Current.customer.address %><br>
@@ -33,7 +33,7 @@
       <div class="row mb-3">
         <div class="col-9 mt-3">  
           <div class="form-check">
-            <%= f.radio_button :select_address, "1" %>
+            <%= f.radio_button :select_address, "1",required: true %>
             <%= f.label :select_address_1, "登録済住所から選択" %><br>
             <%= f.select :address_id, options_from_collection_for_select(Current.customer.addresses, :id, :address_display) %>
           </div>
@@ -42,7 +42,7 @@
       <div class="row">
         <div class="col-5 mt-3">  
           <div class="form-check">
-            <%= f.radio_button :select_address, "2" %>
+            <%= f.radio_button :select_address, "2",required: true %>
             <%= f.label :select_address_2, "新しいお届け先" %>
           </div>
         </div>

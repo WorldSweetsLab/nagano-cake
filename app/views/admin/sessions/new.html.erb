@@ -9,13 +9,6 @@
       <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-9">
 
-          <%# ログインに失敗した際のメッセージを表示する %>
-          <% if flash[:alert].present? %>
-            <div class="alert alert-danger" role="alert">
-              <%= flash[:alert] %>
-            </div>
-          <% end %>
-
           <%= form_with url: admin_session_path do |f| %>
 
             <%# ラベルと入力欄を横に並べる %>

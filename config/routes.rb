@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
 
     # 管理者の商品一覧・詳細・新規登録・編集・更新
-    resources :items, only: [:index, :show, :new, :create, :edit, :update]
+    resources :items, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   
    # 管理者の注文一覧
     resources :orders, only: [:index, :show, :update]
@@ -69,6 +69,6 @@ Rails.application.routes.draw do
     resources :order_details, only: [:update]
 
     # 管理者のジャンル一覧・新規追加
-    resources :genres, only: [:index, :create, :edit, :update]
+    resources :genres, only: [:index, :create, :edit, :update, :destroy]
   end
 end
