@@ -32,6 +32,9 @@ class Public::CartItemsController < Public::ApplicationController
     unless @cart_item.valid?
       return redirect_to cart_items_path, alert: "カートに追加できませんでした"
     end
+    unless @cart_item.item.is_active?
+      return redirect_to cart_items_path, alert: "販売停止中の商品はカートに追加できません"
+    end
     if existing_cart_item
       existing_cart_item.amount += @cart_item.amount
       if existing_cart_item.save
