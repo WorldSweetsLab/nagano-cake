@@ -22,17 +22,21 @@
           <h1 class="fs-2 fw-bold mb-4"><%= @item.name %></h1>
           <p class="fs-6 pb-5 border-bottom"><%= @item.description %></p>
           <p class="fs-3 my-4">¥<%= number_with_delimiter(@item.with_tax_price) %><span class="fs-6 ms-2">(税込)</span></p>
-          <% if authenticated_customer? %>
-            <%= form_with scope: :cart_item, url: cart_items_path, method: :post do |f| %>
-              <div class="d-flex gap-5">
-                <%= f.hidden_field :item_id, value: @item.id %>
-                <%= f.select :amount, (1..10).to_a, {prompt: "個数選択"}, class: "form-select w-auto", required: true %>
-                <%= f.submit "カートに入れる", class: "btn btn-success w-auto" %>
-              </div>
+          <% if @item.is_active? %>
+            <% if authenticated_customer? %>
+              <%= form_with scope: :cart_item, url: cart_items_path, method: :post do |f| %>
+                <div class="d-flex gap-5">
+                  <%= f.hidden_field :item_id, value: @item.id %>
+                  <%= f.select :amount, (1..10).to_a, {prompt: "個数選択"}, class: "form-select w-auto", required: true %>
+                  <%= f.submit "カートに入れる", class: "btn btn-success w-auto" %>
+                </div>
+              <% end %>
+            <% else %>
+              <p>カートへの追加にはログインが必要です</p>
+              <%= link_to "ログインする", new_session_path, class: "btn btn-success w-auto" %>
             <% end %>
           <% else %>
-            <p>カートへの追加にはログインが必要です</p>
-            <%= link_to "ログインする", new_session_path, class: "btn btn-success w-auto" %>
+            <p>この商品は現在販売停止中です。</p>
           <% end %>
         </div>
       </div>
