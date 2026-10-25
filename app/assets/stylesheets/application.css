@@ -9,14 +9,10 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
-* {
-  font-family: 'Zen Kaku Gothic New', sans-serif;
-}
-
 body {
   background-color: #F7F4EC;
   color: #213b47;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
