@@ -4,7 +4,7 @@
 
       <%=link_to "LOGO", root_path, class: "border border-dark px-5 py-2 display-5" %>  
 
-      <% if authenticated_customer? %>
+      <% if controller_path.start_with?("public/") && authenticated_customer? %>
         <div class="welcome-line d-flex align-items-center justify-content-center gap-3">
           <span class="welcome-border"></span>
           <p class="fs-5">ようこそ、<%= Current.customer.last_name %>さん！</p>
@@ -14,7 +14,7 @@
 
       <div class="d-flex flex-column">
         <ul class="nav justify-content-end gap-4">
-          <% if authenticated_customer? %> 
+          <% if controller_path.start_with?("public/") && authenticated_customer? %>
             <li class="nav-item">
               <%= link_to "マイページ", my_page_path, class: "btn btn-outline-dark" %>
             </li>
