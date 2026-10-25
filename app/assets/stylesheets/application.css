@@ -9,19 +9,118 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
+body {
+  background-color: #F7F4EC;
+  color: #213b47;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+
+/* 入力フォーム・検索窓の背景を白に統一 */
+.form-control,
+.form-select {
+  background-color: #ffffff;
+}
+
+/* TOPページリンク先下線・ホバー */
 .home-top a:not(.btn),
 .item-index a:not(.btn),
 .item-show a:not(.btn) {
   color: inherit;
   text-decoration: none;
 }
-
 .home-top a:not(.btn):hover,
 .item-index a:not(.btn):hover,
 .item-show a:not(.btn):hover {
-  color: inherit;
+  color: #426C67;
   text-decoration: underline;
 }
+.home-top .top-all-items-link {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+
+/* ジャンル検索枠のスタイル */
+.genre-box {
+  color: #213b47;
+}
+.genre-box h2 {
+  border-bottom: 2px solid #b4b340;
+  padding-bottom: 12px;
+}
+.genre-box {
+  color: #213b47;
+}
+.genre-title {
+  border-color: #b4b340 !important;
+}
+.genre-title::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #b4b340;
+  margin-right: 8px;
+}
+
+/* TOPメインビジュアル */
+.home-top .top-hero {
+  background-color: #65a5a6;
+  border-radius: 24px;
+  color: #ffffff;
+}
+
+/* 新着一覧、商品一覧、検索一覧セクションの装飾 */
+.section-title::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #b4b340;
+  margin-right: 12px;
+}
+.section-line {
+  width: 110px;
+  border-top: 1px solid #b4b340;
+}
+/* 新着一覧セクションの装飾 */
+.home-top .top-item-line {
+  width: 64px;
+  border-top: 1px solid #b4b340;
+}
+
+
+/* ヘッダー、ログイン中ユーザーの装飾 */
+.site-header {
+  border-color: #213b47 !important;
+}
+.welcome-border {
+  display: inline-block;
+  width: 80px;
+  border-top: 1px solid #9aa08a;
+  transform: translateY(-4px);
+}
+.welcome-line p {
+  color: #2f3a3a;
+}
+
+/* ページネーション */
+.pagination a {
+  color: #213b47;
+  text-decoration: none;
+}
+.pagination a:hover {
+  color: #426c67;
+  text-decoration: underline;
+}
+
 /* 管理者側商品フォームの入力エラー時に参照 */
 .admin-item-form .field_with_errors {
   display: contents;

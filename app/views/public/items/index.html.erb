@@ -2,8 +2,8 @@
   <div class="row">
 
     <div class="col-md-3">
-      <div class="mx-auto w-50 border border-dark border-2 pb-5">
-        <h2 class="fs-6 fw-bold text-center py-2 mb-4 border-bottom border-dark border-2">ジャンル検索</h2>
+      <div class="mx-auto w-50 genre-box">
+        <h2 class="fs-6 fw-bold mb-4 pb-3 border-bottom genre-title">ジャンル検索</h2>
         <% @genres.each do |genre| %>
           <p class="ps-3"><%= link_to genre.name, items_path(genre_id: genre.id)%></p>
         <% end %>
@@ -13,7 +13,7 @@
     <div class="col-md-9">
       <div class="row align-items-center">
        <div class="col-md-10">
-          <h1 class="fs-2 fw-bold mb-4">
+          <h1 class="fs-4 fw-normal mb-4 section-title">
             <% if @word.present? %>
               「<%= @word %>」の検索結果
             <% elsif @genre.present? %>
@@ -21,7 +21,7 @@
             <% else %>
               商品一覧
             <% end %>
-            <span class="fs-4">(全<%= @items.total_count %>件) </span>
+            <span class="fs-5">(全<%= @items.total_count %>件) </span>
           </h1>
             <div class="row">
               <% @items.each do |item| %>

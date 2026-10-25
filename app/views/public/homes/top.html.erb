@@ -1,47 +1,56 @@
-<div class="container-fluid mt-5 mb-3 item-index home-top">
+<div class="container-fluid pt-5 pb-5 item-index home-top">
   <div class="row">
+
     <div class="col-md-3">
-      <div class="mx-auto w-50 border border-dark border-2 pb-5">
-        <h2 class="fs-6 fw-bold text-center py-2 mb-4 border-bottom border-dark border-2">ジャンル検索</h2>
+      <div class="mx-auto w-50 genre-box">
+        <h2 class="fs-6 fw-bold mb-4 pb-3 border-bottom genre-title">ジャンル検索</h2>
         <% @genres.each do |genre| %>
           <p class="ps-3"><%= link_to genre.name, items_path(genre_id: genre.id)%></p>
         <% end %>
       </div>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-9 pe-md-4 pe-lg-5">
       <div class="row">
-        <div class="col-md-8">
-          <div class="row align-items-center border mb-3 py-5">
+        <div class="col-md-11">
+          <div class="row align-items-center mb-3 py-5 px-4 top-hero">
             <div class="col-md-5 p-3">
-              <%= image_tag "dummy_cake2.jpg", class: "img-fluid" %>
+              <%= image_tag "main_cake.png", class: "img-fluid top-hero-cake ms-4" %>
             </div>
             <div class="col-md-7">
-              <h1 class="fs-3 mb-4">ようこそ、ながのCAKEへ!</h1>
-              <p>このサイトは、ケーキ販売のECサイトになります。<br>
-                  会員でない方も商品の閲覧はできますが、<br>
-                  購入には会員登録が必要になります。</p>
+              <div class="w-75 border-bottom border-white mb-4 pb-3">
+                <h1 class="fs-3 fw-normal mb-2">ようこそ、ながのCAKEへ !</h1>
+              </div>
+              <p class="lh-lg">このサイトは、ケーキ販売のECサイトになります。<br>
+                会員でない方も商品の閲覧はできますが、<br>
+                購入には会員登録が必要になります。</p>
             </div>
           </div>
         </div>
 
-      <div class="row mb-2 gx-3">
-        <h2 class="fw-bold mb-4">新着商品</h2>
+      <div class="row mt-4 mb-2 gx-4">
+        <h2 class="fs-4 fw-normal mb-4 d-flex align-items-center gap-3 section-title">
+          新着商品
+          <span class="section-line"></span>
+        </h2>
           <% @items.each do |item| %>
-            <div class="col-6 col-md-auto">
+            <div class="col-6 col-md-3 mb-4">
               <div>
                 <%= link_to item_path(item) do %>
-                  <%= image_tag item.get_item_image(240,160), class: "border img-fluid" %>
+                  <%= image_tag item.get_item_image(270,180), class: "img-fluid w-100" %>
                 <% end %>
               </div>
-              <p><%= link_to item.name, item_path(item) %></p>
-              <p>¥<%= number_with_delimiter(item.with_tax_price) %></p>
+              <p class="mt-2 mb-2">
+                <%= link_to item.name, item_path(item) %>
+              </p>
+              <div class="top-item-line mb-2"></div>
+              <p class="text-dark">¥<%= number_with_delimiter(item.with_tax_price) %></p>
             </div>
           <% end %>
       </div>
 
-      <div class="text-end w-75 ms-5">
-        <%= link_to "全ての商品を見る > ", items_path %>
+      <div class="text-end pe-3">
+        <%= link_to "全ての商品を見る > ", items_path, class: "top-all-items-link" %>
       </div>
 
     </div>
