@@ -40,7 +40,7 @@ class Public::OrdersController < Public::ApplicationController
       cart_items = Current.customer.cart_items
 
     if Current.customer.cart_items.empty?
-      redirect_to cart_items_path, alert: "カートに商品にがありません"
+      redirect_to cart_items_path, alert: "カートに商品がありません"
       return
     end
 
@@ -48,7 +48,7 @@ class Public::OrdersController < Public::ApplicationController
       redirect_to cart_items_path, alert: "販売停止中の商品が含まれているため、注文できません。"
       return
     end
-    
+
       @order.status = :waiting_for_payment
       @order.calculate_total_payment(cart_items)
 
