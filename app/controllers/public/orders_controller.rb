@@ -1,6 +1,11 @@
 class Public::OrdersController < Public::ApplicationController
 
   def new
+    if Current.customer.cart_items.empty?
+      redirect_to cart_items_path, alert: "カート商品にがありません"
+      return
+    end
+
     @order = Order.new
   end
 
@@ -8,6 +13,11 @@ class Public::OrdersController < Public::ApplicationController
     select_address = params[:order][:select_address]
     @order = Order.new(order_params)
     @cart_items = Current.customer.cart_items
+
+    if Current.customer.cart_items.empty?
+      redirect_to cart_items_path, alert: "カート商品にがありません"
+      return
+    end
 
     if select_address == "0"
       @order.postal_code = Current.customer.postal_code
@@ -28,6 +38,11 @@ class Public::OrdersController < Public::ApplicationController
   def create #注文確定処理工程
     @order = Current.customer.orders.new(order_params)
       cart_items = Current.customer.cart_items
+
+    if Current.customer.cart_items.empty?
+      redirect_to cart_items_path, alert: "カートに商品がありません"
+      return
+    end
       @order.status = :waiting_for_payment
       @order.calculate_total_payment(cart_items)
 
