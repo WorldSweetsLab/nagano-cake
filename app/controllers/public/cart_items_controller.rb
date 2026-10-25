@@ -7,6 +7,9 @@ class Public::CartItemsController < Public::ApplicationController
 
   def update
     @cart_item = Current.customer.cart_items.find(params[:id])
+    unless @cart_item.item.is_active?
+      return redirect_to cart_items_path, alert: "販売停止中の商品のため数量が変更できません"
+    end
     if @cart_item.update(cart_item_params.slice(:amount))
       redirect_to cart_items_path, notice: "数量を変更しました"
     else
@@ -31,6 +34,9 @@ class Public::CartItemsController < Public::ApplicationController
     existing_cart_item = Current.customer.cart_items.find_by(item_id: @cart_item.item_id)
     unless @cart_item.valid?
       return redirect_to cart_items_path, alert: "カートに追加できませんでした"
+    end
+    unless @cart_item.item.is_active?
+      return redirect_to cart_items_path, alert: "販売停止中の商品はカートに追加できません"
     end
     if existing_cart_item
       existing_cart_item.amount += @cart_item.amount
