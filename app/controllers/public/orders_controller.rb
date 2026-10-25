@@ -43,6 +43,12 @@ class Public::OrdersController < Public::ApplicationController
       redirect_to cart_items_path, alert: "カートに商品がありません"
       return
     end
+
+    if cart_items.any? { |cart_item| !cart_item.item.is_active? }
+      redirect_to cart_items_path, alert: "販売停止中の商品が含まれているため、注文できません。"
+      return
+    end
+
       @order.status = :waiting_for_payment
       @order.calculate_total_payment(cart_items)
 
