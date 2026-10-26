@@ -32,7 +32,7 @@
 
   <body>
 
-    <% if controller_path.start_with?("admin/") && authenticated_admin? %>
+    <% if controller_path.start_with?("admin/") %>
       <%= render "admin/shared/header" %>
     <% else %>
       <%= render "public/shared/header" %>
