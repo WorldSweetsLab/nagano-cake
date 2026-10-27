@@ -2,9 +2,9 @@
   <div class="d-flex flex-wrap align-items-center justify-content-between gap-4 px-4">
 
     <%# ログイン状態に応じて、ロゴのリンク先を切り替える %>
-    <%= link_to "LOGO",
-        (authenticated_admin? ? admin_top_path : new_admin_session_path),
-        class: "border border-dark px-5 py-2 display-5 text-dark text-decoration-none" %>
+    <%= link_to (authenticated_admin? ? admin_top_path : new_admin_session_path), class: "ms-3" do %>
+        <%= image_tag "nagano_cake_logo.png", alt: "ながのCAKE", height: 100 %>
+    <% end %>
 
     <%# 管理者メニューはログイン後に表示する %>
     <% if authenticated_admin? %>

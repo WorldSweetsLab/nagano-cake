@@ -2,7 +2,9 @@
   <div class="row w-100 mx-auto">
     <div class="col-12 mx-auto px-4 d-flex align-items-center justify-content-between">
 
-      <%=link_to "LOGO", root_path, class: "border border-dark px-5 py-2 display-5" %>  
+      <%= link_to root_path, class: "ms-3" do %>
+        <%= image_tag "nagano_cake_logo.png", alt: "ながのCAKE", height: 100 %>
+      <% end %>
 
       <% if controller_path.start_with?("public/") && authenticated_customer? %>
         <div class="welcome-line d-flex align-items-center justify-content-center gap-3">
